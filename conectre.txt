@@ -1,0 +1,56 @@
+using System;
+using System.ComponentModel;
+using System.Net;
+using System.Runtime.InteropServices;
+
+public sealed class NetworkConnection : IDisposable
+{
+    private readonly string _networkName;
+
+    public NetworkConnection(string networkName, NetworkCredential credentials)
+    {
+        _networkName = networkName;
+        var nr = new NETRESOURCE
+        {
+            dwType = ResourceType.RESOURCETYPE_DISK,
+            lpRemoteName = networkName
+        };
+
+        var userName = string.IsNullOrEmpty(credentials.Domain)
+            ? credentials.UserName
+            : $@"{credentials.Domain}\{credentials.UserName}";
+
+        int result = WNetAddConnection2(ref nr, credentials.Password, userName, 0);
+        if (result != 0 && result != 1219) // 1219: ya existe con otras credenciales
+            throw new Win32Exception(result, $"No se pudo conectar a {networkName} (código {result}).");
+    }
+
+    public void Dispose()
+    {
+        WNetCancelConnection2(_networkName, 0, true);
+    }
+
+    [DllImport("mpr.dll")]
+    private static extern int WNetAddConnection2(ref NETRESOURCE lpNetResource, string lpPassword, string lpUserName, int dwFlags);
+
+    [DllImport("mpr.dll")]
+    private static extern int WNetCancelConnection2(string lpName, int dwFlags, bool fForce);
+
+    [StructLayout(LayoutKind.Sequential)]
+    private struct NETRESOURCE
+    {
+        public ResourceScope dwScope;
+        public ResourceType dwType;
+        public ResourceDisplayType dwDisplayType;
+        public ResourceUsage dwUsage;
+        [MarshalAs(UnmanagedType.LPWStr)] public string lpLocalName;
+        [MarshalAs(UnmanagedType.LPWStr)] public string lpRemoteName;
+        [MarshalAs(UnmanagedType.LPWStr)] public string lpComment;
+        [MarshalAs(UnmanagedType.LPWStr)] public string lpProvider;
+    }
+
+    private enum ResourceScope { RESOURCE_CONNECTED = 1, RESOURCE_GLOBALNET, RESOURCE_REMEMBERED, RESOURCE_RECENT, RESOURCE_CONTEXT }
+    private enum ResourceType { RESOURCETYPE_ANY, RESOURCETYPE_DISK, RESOURCETYPE_PRINT, RESOURCETYPE_RESERVED }
+    private enum ResourceDisplayType { RESOURCEDISPLAYTYPE_GENERIC, RESOURCEDISPLAYTYPE_DOMAIN, RESOURCEDISPLAYTYPE_SERVER, RESOURCEDISPLAYTYPE_SHARE }
+    [Flags] private enum ResourceUsage { RESOURCEUSAGE_CONNECTABLE = 0x00000001, RESOURCEUSAGE_CONTAINER = 0x00000002 }
+}

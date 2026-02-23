@@ -1,0 +1,705 @@
+﻿/* Evita subrayado en el sidebar de sb-admin-2 */
+.sidebar a:hover,
+.sidebar .nav-link:hover,
+.sidebar .collapse-item:hover,
+#accordionSidebar a:hover,
+#accordionSidebar .nav-link:hover,
+#accordionSidebar .collapse-item:hover {
+    text-decoration: none !important;
+}
+
+
+
+
+.sidebar .nav-item a.nav-link:hover,
+.sidebar .collapse-inner a.collapse-item:hover,
+#accordionSidebar .nav-link:hover,
+#accordionSidebar .collapse-item:hover {
+    text-decoration: none !important;
+}
+
+
+.sidebar .nav-item a.nav-link span,
+.sidebar .collapse-inner a.collapse-item span {
+    text-decoration: none !important;
+}
+
+.sidebar .nav-item a.nav-link:hover {
+    background-color: #1e3a8a !important;
+}
+.sidebar .nav-item.active .nav-link {
+    color: #ffffff !important;
+    font-weight: bold;
+}
+
+    .sidebar .nav-item a.nav-link:hover span {
+        text-decoration: none !important;
+    }
+
+/* Quitar subrayado de todo el menú lateral de sb-admin-2 (incluso span dentro de <a>) */
+#accordionSidebar a,
+#accordionSidebar a:hover,
+#accordionSidebar a:focus,
+#accordionSidebar .nav-link,
+#accordionSidebar .nav-link:hover,
+#accordionSidebar .collapse-item,
+#accordionSidebar .collapse-item:hover,
+#accordionSidebar a span,
+#accordionSidebar a:hover span,
+#accordionSidebar .nav-link span,
+#accordionSidebar .nav-link:hover span,
+#accordionSidebar .collapse-item span,
+#accordionSidebar .collapse-item:hover span {
+    text-decoration: none !important;
+}
+
+.sidebar .nav-item a.nav-link,
+.sidebar .nav-item a.nav-link span,
+.sidebar .nav-item a.nav-link:hover,
+.sidebar .nav-item a.nav-link:hover span,
+.sidebar .collapse-item,
+.sidebar .collapse-item span,
+.sidebar .collapse-item:hover,
+.sidebar .collapse-item:hover span {
+    text-decoration: none !important;
+    text-decoration-line: none !important;
+    text-decoration-style: none !important;
+}
+#accordionSidebar a,
+#accordionSidebar a *,
+.sidebar a,
+.sidebar a * {
+    text-decoration: none !important;
+}
+#accordionSidebar .nav-link span,
+#accordionSidebar .nav-link:hover span,
+#accordionSidebar .nav-link.active span {
+    text-decoration: none !important;
+}
+
+#accordionSidebar .nav-link,
+#accordionSidebar .nav-link:hover,
+#accordionSidebar .nav-link.active {
+    text-decoration: none !important;
+}
+#accordionSidebar a span {
+    text-decoration: none !important;
+    text-decoration-line: none !important;
+    -webkit-text-decoration-line: none !important;
+    -moz-text-decoration-line: none !important;
+}
+/* Elimina subrayado del menú lateral, incluso heredado desde <a> */
+#accordionSidebar a,
+#accordionSidebar a:hover,
+#accordionSidebar a span,
+#accordionSidebar a:hover span,
+.sidebar a,
+.sidebar a:hover,
+.sidebar a span,
+.sidebar a:hover span {
+    text-decoration: none !important;
+    -webkit-text-decoration-line: none !important;
+    -moz-text-decoration-line: none !important;
+}
+
+#accordionSidebar .nav-item > a.nav-link,
+#accordionSidebar .nav-item > a.nav-link:link,
+#accordionSidebar .nav-item > a.nav-link:visited,
+#accordionSidebar .nav-item > a.nav-link:focus,
+#accordionSidebar .nav-item > a.nav-link:active {
+    text-decoration: none !important;
+}
+
+    #accordionSidebar .nav-item > a.nav-link *,
+    #accordionSidebar .nav-item > a.nav-link:hover *,
+    #accordionSidebar .nav-item > a.nav-link:focus * {
+        text-decoration: none !important;
+    }
+
+/* Quitar subrayado y negrita del texto del menú lateral */
+#accordionSidebar a,
+#accordionSidebar a:hover,
+#accordionSidebar a span,
+#accordionSidebar a:hover span,
+#accordionSidebar .nav-link.active,
+#accordionSidebar .nav-link.active span {
+    text-decoration: none !important;
+    font-weight: normal !important;
+}
+
+.card-body .font-weight-bold {
+    font-weight: normal !important;
+}
+
+.card-body .font-weight-bold {
+    font-weight: normal !important;
+    text-decoration: none !important;
+}
+/* Quitar subrayado de enlaces SOLO dentro del menú lateral */
+#accordionSidebar a,
+#accordionSidebar a:link,
+#accordionSidebar a:visited,
+#accordionSidebar a:active,
+#accordionSidebar a span {
+    text-decoration: none !important;
+}
+.sidebar a {
+    text-decoration: none !important;
+}
+
+    .sidebar a * {
+        text-decoration: none !important;
+    }
+
+/* Quitar box-shadow y bordes visuales de los elementos activos */
+#accordionSidebar a:focus,
+#accordionSidebar a:active,
+#accordionSidebar a.nav-link:focus,
+#accordionSidebar a.nav-link:active {
+    outline: none !important;
+    box-shadow: none !important;
+    border-bottom: none !important;
+}
+
+:root {
+    --bs-accordion-btn-focus-box-shadow: none !important;
+}
+
+/* Eliminar cualquier subrayado visual residual en el menú lateral */
+#accordionSidebar a,
+#accordionSidebar a *,
+#accordionSidebar a::before,
+#accordionSidebar a::after,
+#accordionSidebar a *::before,
+#accordionSidebar a *::after {
+    text-decoration: none !important;
+    border-bottom: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+    background-image: none !important;
+}
+.no-subrayado {
+    all: unset;
+    display: inline;
+    font-weight: normal !important;
+    text-decoration: none !important;
+}
+
+.sidebar-brand,
+.sidebar-brand * {
+    text-decoration: none !important;
+}
+/* Elimina subrayado de todos los enlaces del menú */
+#accordionSidebar a,
+#accordionSidebar a span,
+#accordionSidebar a:hover,
+#accordionSidebar a:focus,
+#accordionSidebar a:active {
+    text-decoration: none !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* Por si se aplica estilo desde reboot */
+.sidebar-brand,
+.sidebar-brand * {
+    text-decoration: none !important;
+    font-weight: normal !important;
+}
+#accordionSidebar a * {
+    text-decoration: none !important;
+    text-shadow: none !important;
+    box-shadow: none !important;
+    border-bottom: none !important;
+    outline: none !important;
+}
+
+/*Estatus de los oficios*/
+.estatus-concluido {
+    border: 2px solid green;
+    background-color: #e6ffe6;
+    color: #1e7e34;
+    padding: 2px 8px;
+    border-radius: 6px;
+    
+    font-size: 12px;
+    font-weight: 600;
+    height: 25px;
+    width: 70px;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center;
+    text-align: center;
+    white-space: nowrap;
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+}
+.estatus-recibido {
+    border: 2px solid #5e2ab5;
+    background-color: #a89ae6;
+    color: #6633d3;
+    padding: 2px 8px;
+    border-radius: 6px;
+  
+    font-size: 12px;
+    font-weight: 600;
+    height: 25px;
+    width: 70px;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center;
+    text-align: center;
+    white-space: nowrap;
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+}
+.estatus-capturado {
+    border: 2px solid #0239d1;
+    background-color: #466ace;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    height: 25px;
+    width: 70px;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center;
+    text-align: center;
+    white-space: nowrap;
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+}
+.estatus-EnProceso {
+    border: 2px solid #068ef5;
+    background-color: #a0d0e2;
+    color: #1782b7;
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    height: 25px;
+    width: 70px;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center;
+    text-align: center;
+    white-space: nowrap;
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+}
+
+.estatus-turnado {
+    border: 2px solid orange;
+    background-color: #fff3cd;
+    color: #856404;
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    height: 25px;
+    width: 70px;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center;
+    text-align: center;
+    white-space: nowrap;
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+}
+
+.estatus-pendiente {
+    border: 2px solid red;
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 2px 8px;
+    border-radius: 15px;
+    font-size: 12px;
+    font-weight: 600;
+    height: 15px;
+    width: 70px;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center;
+    text-align: center;
+    white-space: nowrap;
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+}
+
+
+/*Formato del modal*/
+.custom-modal {
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 50, 0.2);
+    overflow: hidden;
+    border: none;
+}
+
+.custom-header {
+    background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
+    padding: 1rem 1.25rem;
+}
+
+
+
+.modal-body {
+    font-size: 1rem;
+    padding: 1.5rem;
+}
+
+.close {
+    font-size: 1.5rem;
+    opacity: 0.8;
+}
+
+    .close:hover {
+        opacity: 1;
+    }
+.table-wrapper {
+    max-height: 500px;
+    overflow-y: auto;
+
+}
+
+.grid-header th {
+    position: sticky;
+    top: 0;
+    background-color: #a4a4a4;
+    z-index: 1;
+}
+.destino-tag {
+    background-color: #e5ccf5;
+    border: 2px solid #9b59b6;
+    color: #4a235a;
+    padding: 6px 12px;
+    border-radius: 20px;
+    display: inline-flex;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 500;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+    .destino-tag .cerrar {
+        margin-left: 10px;
+        cursor: pointer;
+        color: #6c3483;
+        font-weight: bold;
+        border: none;
+        background: none;
+    }
+
+@keyframes shake {
+    10%, 90% {
+        transform: translate3d(-1px, 0, 0);
+    }
+
+    20%, 80% {
+        transform: translate3d(2px, 0, 0);
+    }
+
+    30%, 50%, 70% {
+        transform: translate3d(-4px, 0, 0);
+    }
+
+    40%, 60% {
+        transform: translate3d(4px, 0, 0);
+    }
+}
+/*Vibración del modal*/
+.shake-animation {
+    animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+}
+
+.seguimientos-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Espacio entre las tarjetas */
+}
+
+.seguimiento-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+    padding: 15px;
+    width: 100%; /* Ajusta el ancho según tu diseño, puedes usar max-width */
+    background-color: #fff;
+}
+
+.card-title {
+    font-size: 1.2em;
+    margin-bottom: 5px;
+}
+
+.card-subtitle {
+    font-size: 0.9em;
+    color: #666;
+}
+
+.card-text {
+    margin-top: 10px;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    display: inline-flex; /* Para que el ícono y texto estén en línea */
+    align-items: center;
+    gap: 5px; /* Espacio entre ícono y texto */
+}
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
+/* Si usas Font Awesome para íconos */
+.fas {
+    font-size: 1em;
+}
+
+.pdf-viewer-container-sm {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-top: 10px;
+}
+
+    .pdf-viewer-container-sm iframe {
+        display: block;
+    }
+.seguimiento-card .card-title {
+    color: #333; /* Un gris oscuro más fuerte */
+    font-weight: bold; /* Hacer el título en negrita */
+    font-size: 1.25rem; /* Un poco más grande si lo deseas */
+    margin-bottom: 0.5rem; /* Espacio debajo del título */
+}
+.seguimiento-card .card-subtitle {
+    color: #666; /* Un gris medio para la fecha */
+    font-size: 0.9rem; /* Un poco más pequeño que el título */
+    margin-bottom: 1rem; /* Más espacio debajo de la fecha antes del contenido */
+}
+.seguimiento-card .card-text {
+    color: #444; /* Un gris oscuro para el texto principal */
+    line-height: 1.6; /* Mayor altura de línea para mejor lectura */
+    margin-bottom: 1rem; /* Espacio antes del archivo adjunto */
+}
+.seguimiento-card h6.mt-3 { /* Usa el selector más específico si es necesario */
+    color: #555; /* Un gris un poco más claro que el texto principal */
+    font-weight: 600; /* Ligeramente más negrita para destacarlo */
+    margin-top: 1.5rem !important; /* Más espacio encima, si mt-3 no es suficiente */
+    margin-bottom: 0.8rem;
+}
+.seguimiento-card small.text-muted {
+    color: #777 !important; /* Un gris más oscuro que el 'text-muted' por defecto */
+    margin-top: 1rem !important;
+}
+.seguimiento-card {
+    border-top: 5px solid #007bff; /* Un borde superior con el color principal de Bootstrap */
+    padding-top: 15px; /* Espacio para que el borde se vea bien */
+}
+.seguimientos-container {
+    padding: 25px; /* Más espacio interno */
+    background-color: #f0f0f0; /* Un fondo ligeramente diferente para la sección completa */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05); /* Sombra suave para que destaque */
+}
+    .seguimientos-container h3 {
+        color: #2c3e50; /* Un color más oscuro para el título principal de la sección */
+        margin-bottom: 20px; /* Espacio debajo del título */
+        border-bottom: 2px solid #e0e0e0; /* Una línea debajo del título */
+        padding-bottom: 10px;
+    }
+.card.p-4.mt-4 {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05); /* Sombra más suave */
+}
+
+/* Título de la tarjeta "Detalles Adicionales" */
+.card-title {
+    color: #333; /* Un gris oscuro fuerte */
+    font-weight: bold;
+    font-size: 1.35rem; /* Un poco más grande */
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee; /* Una línea sutil debajo del título */
+}
+
+/* Estilo para cada par de "etiqueta: valor" */
+.detail-item {
+    margin-bottom: 15px; /* Espacio entre cada elemento de detalle */
+}
+
+    /* Estilo para las etiquetas (Fecha de Atención, Para conocimiento) */
+    .detail-item .detail-label {
+        display: block; /* Asegura que la etiqueta esté en su propia línea */
+        font-weight: bold; /* Hacer la etiqueta en negrita */
+        color: #444; /* Un gris oscuro para las etiquetas */
+        margin-bottom: 5px; /* Espacio entre la etiqueta y el valor */
+        font-size: 0.95rem; /* Ligeramente más pequeña que el valor */
+    }
+
+    /* Estilo para los valores (No especificada, No, la fecha real) */
+    .detail-item .asp-literal-value { /* Asigna esta clase a tus literales en el code-behind o HTML */
+        font-size: 1.1rem; /* Un poco más grande para el valor */
+        color: #666; /* Un gris medio para el valor */
+        padding: 5px 10px; /* Fondo sutil para el valor */
+        background-color: #f8f8f8; /* Un fondo gris muy claro */
+        border-radius: 4px;
+        display: inline-block; /* Para que el fondo se ajuste al texto */
+        border: 1px solid #e9ecef; /* Borde muy sutil */
+    }
+
+/* Estilos para los TextBox si están en modo de edición */
+.form-control[type="date"] {
+    /* Aquí puedes añadir estilos específicos para el input de fecha si lo usas */
+    background-color: #fff;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #495057;
+}
+
+.turnados-list-container {
+    background-color: #f8f9fa; /* Fondo gris claro */
+    /*border: 1px solid #dee2e6;*/ /* Borde sutil */
+    border-radius: 5px; /* Bordes redondeados */
+    padding: 15px;
+    min-height: 50px;
+}
+
+.turnado-items-list {
+    list-style: none; /* Elimina las viñetas */
+    padding: 0;
+    margin: 0;
+}
+.turnado-item-list-item {
+    margin-bottom: 8px; /* Espacio entre cada elemento turnado */
+    padding-bottom: 8px; /* Para una línea divisoria */
+    border-bottom: 1px dashed #e0e0e0; /* Línea punteada sutil */
+    display: flex; /* Para alinear el badge y el estado */
+    justify-content: space-between; /* Espacio entre el badge y el estado */
+    align-items: center;
+}
+    /* Quitar borde inferior del último elemento */
+    .turnado-item-list-item:last-child {
+        border-bottom: none;
+        margin-bottom: 0;
+        padding-bottom: 0;
+    }
+
+
+/* Estilo base para los "badges" o "chips" que muestran la dirección/departamento/área */
+.turnado-badge {
+    display: inline-block;
+    padding: 0.4em 0.8em;
+    font-size: 0.9em;
+    font-weight: 600;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    border-radius: 0.25rem;
+    color: #fff; /* Color de texto blanco por defecto */
+    background-color: #007bff; /* Un color de fondo predeterminado */
+}
+
+/* Puedes añadir colores específicos si quieres distinguir por tipo de organización */
+/* .turnado-badge-direccion { background-color: #007bff; } */
+/* .turnado-badge-departamento { background-color: #28a745; } */
+/* .turnado-badge-area { background-color: #ffc107; color: #343a40;} */
+
+
+/* Estilo para el texto "Para conocimiento" o "Normal" */
+.turnado-conocimiento-status {
+    font-size: 0.85em;
+    color: #6c757d; /* Un gris sutil */
+    font-weight: 500;
+    /* Puedes añadir un badge de Bootstrap aquí si prefieres un aspecto similar */
+    /*Ejemplo: <span class='badge badge-info'>Para conocimiento</span> */
+}
+.login-box {
+    position: relative; /* Esencial para que el logo se posicione dentro de este contenedor */
+    /* Otros estilos de .login-box */
+}
+
+.top-left-logo {
+    position: absolute; /* Posiciona el logo dentro de .login-box */
+    top: 20px; /* Distancia desde la parte superior */
+    left: 20px; /* Distancia desde la izquierda */
+}
+
+    .top-left-logo img {
+        height: 200px; /* Tamaño del logo. Puedes ajustarlo. */
+        width: 300px;
+    }
+.sidebar-footer {
+    padding-left:20px;
+   padding-bottom:15px;
+    /* Puedes agregar más estilos aquí, como un padding o margen */
+}
+
+/* Corrige posición y espacio del texto del checkbox */
+.form-check-input {
+    margin-top: 0 !important;
+}
+
+.form-check input[type="checkbox"] + label,
+.form-check .aspNetDisabled + span {
+    margin-left: 0.5rem;
+}
+
+.form-check label,
+.form-check span {
+    vertical-align: middle;
+    display: inline-block;
+    white-space: nowrap;
+}
+
+#toggleInternos {
+    margin-right: 6px !important;
+}
+
+.form-check.form-switch {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.form-check-label {
+    white-space: nowrap;
+    margin-bottom: 0;
+}
+
+footer.sticky-footer {
+    width: 100%;
+    text-align: center;
+    float: none !important;
+    clear: both !important;
+    margin-top: auto;
+    background-color: #fff;
+    color: #555;
+    font-weight: 500;
+    padding: 10px 0;
+    box-shadow: 0 -1px 3px rgba(0,0,0,.05);
+}
+
+    footer.sticky-footer .container.my-auto {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+

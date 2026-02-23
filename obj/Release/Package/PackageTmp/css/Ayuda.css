@@ -1,0 +1,153 @@
+﻿
+
+/* Contenedor principal del diseño */
+.main-layout {
+    display: flex;
+    width: 100%;
+}
+
+/* Estilos de la barra lateral (Sidebar) */
+.sidebar {
+    width: 250px;
+    background-color: #1e3a5f; /* Color azul oscuro */
+    color: #ffffff;
+    padding: 20px;
+    height: 100vh;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+    .sidebar .logo {
+        font-size: 2em;
+        font-weight: bold;
+        margin-bottom: 30px;
+        padding-left: 10px;
+    }
+
+.sidebar-menu a {
+    color: #ffffff;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    padding: 15px 10px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    transition: background-color 0.3s;
+}
+
+    .sidebar-menu a:hover, .sidebar-menu a.active {
+        background-color: #2c4a75;
+    }
+
+.sidebar-menu i {
+    margin-right: 15px;
+    font-size: 1.2em;
+}
+
+/* Estilos del contenedor principal (Header + Contenido) */
+.main-content {
+    flex-grow: 1; /* Ocupa el espacio restante */
+    padding: 20px 40px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Estilos del encabezado (Header) */
+.header {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #e0e6ed;
+    margin-bottom: 30px;
+}
+
+    .header .user-info {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .header .user-avatar {
+        width: 35px;
+        height: 35px;
+        background-color: #c0c0c0;
+        border-radius: 50%;
+    }
+
+/* Estilos de la tarjeta de ayuda */
+.ayuda-container {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    text-align: center;
+    max-width: 500px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+    .ayuda-container h1 {
+        color: #1e3a5f;
+        margin-bottom: 20px;
+        font-size: 2em;
+    }
+
+    .ayuda-container p {
+        font-size: 1.1em;
+        color: #666;
+        margin-bottom: 30px;
+    }
+
+.ayuda-contacto {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.contacto-item {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: left;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    transition: background-color 0.3s ease;
+}
+
+    .contacto-item:hover {
+        background-color: #eef4f8;
+    }
+
+    .contacto-item .icono {
+        font-size: 1.8em;
+        color: #007bff;
+        margin-right: 20px;
+        min-width: 30px;
+    }
+
+    .contacto-item .texto h3 {
+        margin: 0;
+        font-size: 1.2em;
+        color: #1e3a5f;
+    }
+
+    .contacto-item .texto a {
+        text-decoration: none;
+        color: #007bff;
+        font-size: 1em;
+        transition: color 0.3s ease;
+    }
+
+        .contacto-item .texto a:hover {
+            color: #0056b3;
+            text-decoration: underline;
+        }
+
+/* Estilos del pie de página */
+.footer {
+    margin-top: auto; /* Empuja el footer hacia la parte inferior */
+    text-align: center;
+    padding-top: 20px;
+    color: #999;
+}

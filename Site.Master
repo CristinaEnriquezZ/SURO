@@ -1,0 +1,1961 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="SURO2.SiteMaster" %>
+
+<!DOCTYPE html>
+
+<html lang="es">
+<head runat="server">
+    <asp:ContentPlaceHolder ID="head" runat="server"></asp:ContentPlaceHolder>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1,shrink-to-fit=no" />
+    <title><%: Page.Title %> - S.U.R.O</title>
+
+
+    <asp:PlaceHolder runat="server">
+        <%: Scripts.Render("~/bundles/modernizr") %>
+    </asp:PlaceHolder>
+
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css" />
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet" />
+
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin-2.min.css" rel="stylesheet" />
+    <webopt:BundleReference runat="server" Path="~/Content/css" />
+    <link href="css/Personalizado.css" rel="stylesheet" />
+    <script src="Scripts/ModalScript.js"></script>
+
+    <style>
+        body.login-page {
+            background: linear-gradient(to right, #6a0572, #1e90ff);
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+            body.login-page #SiteWrapper,
+            body.login-page #wrapper,
+            body.login-page #content-wrapper,
+            body.login-page #content,
+            body.login-page .container-fluid {
+                background: transparent !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                box-shadow: none !important;
+                height: 100%;
+                min-height: 100%;
+            }
+
+            body.login-page .login-container {
+                height: 100vh;
+                display: flex;
+                justify-content: center;
+                align-items: flex-start; /* posiciona arriba */
+                padding-top: 8vh;
+            }
+
+        .login-box {
+            display: flex;
+            flex-direction: row;
+            width: 1000px;
+            height: 500px;
+            max-width: 95%;
+            background: white;
+            border-radius: 0.75rem;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+        }
+
+            .login-box .left,
+            .login-box .right {
+                flex: 1;
+                padding: 3rem;
+            }
+
+            .login-box img {
+                max-width: 100%;
+                height: auto;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+        @media (max-width: 768px) {
+            .login-box {
+                flex-direction: column;
+            }
+
+                .login-box .left,
+                .login-box .right {
+                    text-align: center;
+                }
+        }
+
+        .login-box .right {
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* CENTRA verticalmente */
+            align-items: flex-start; /* alinea a la izquierda */
+            padding: 2rem 3rem;
+        }
+    </style>
+</head>
+
+<body id="page-top">
+    <form id="form1" runat="server">
+        <asp:ScriptManager ID="ScriptManager1" runat="server" />
+        <!-- Page Wrapper -->
+        <div id="wrapper">
+
+            <!-- Sidebar -->
+            <ul id="accordionSidebar" clientidmode="Static" runat="server" class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion">
+                <!-- Sidebar - Brand -->
+                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="Default.aspx">
+
+                    <img src="img/suro_menu.png" style="width: 150px; height: 150px;" />
+
+                </a>
+
+                <!-- Divider -->
+                <hr class="sidebar-divider my-0" />
+
+                <!-- Nav Item - Dashboard -->
+               <li runat="server" id="Resumen" class="nav-item">
+                <a class="nav-link collapsed" href="#" id="headingResumen"
+                   data-toggle="collapse" data-target="#collapseResumen"
+                   aria-expanded="false" aria-controls="collapseResumen">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Resumen</span>
+                </a>
+
+                <div id="collapseResumen" class="collapse" aria-labelledby="headingResumen"
+                     data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Resumen:</h6>
+
+                        <!-- Opción 1: General -->
+                        <a runat="server" id="lnkResumenGeneral"
+                           class="collapse-item" href="Default.aspx">General</a>
+
+                        <!-- Opción 2: (ejemplo) Internos -->
+                        <a runat="server" id="lnkResumenInternos"
+                           class="collapse-item" href="ResumenInternos.aspx">Internos</a>
+
+                        <!-- O agrega más según necesites -->
+                        <%-- <a runat="server" id="lnkResumenExternos"
+                               class="collapse-item" href="ResumenExternos.aspx">Externos</a> --%>
+                    </div>
+                </div>
+            </li>
+                <!-- Divider -->
+                <hr class="sidebar-divider" />
+
+                <!-- Captura -->
+                <li runat="server" visible="false" id="Captura" class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" id="headingTwo" data-target="#collapseTwo"
+                        aria-expanded="true" aria-controls="collapseTwo">
+                        <i class="fas fa-fw fa-cog"></i>
+                        <span>Captura</span>
+                    </a>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Captura Oficios:</h6>
+
+                            <!-- Captura Externos -->
+                            <a id="CapturaExternos" runat="server"
+                                class="collapse-item" href="Externos.aspx">Externos
+                            </a>
+
+                            <!-- Captura Internos -->
+                            <a id="CapturaInternos" runat="server"
+                                class="collapse-item" href="Internos.aspx">Internos
+                            </a>
+                        </div>
+                    </div>
+                </li>
+
+                <!-- Visualización -->
+                <li runat="server" id="Visualizacion" class="nav-item">
+                    <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#collapseUtilities"
+                        aria-expanded="true" aria-controls="collapseUtilities">
+                        <i class="fas fa-fw fa-wrench"></i>
+                        <span>Visualización</span>
+                    </a>
+                    <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+                        data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Oficios:</h6>
+
+                            <!-- Link Externos como control de servidor -->
+                            <a id="VisualizacionExternos" runat="server"
+                                class="collapse-item" href="Visualizacion.aspx">Externos
+                            </a>
+
+                            <!-- Link Internos como control de servidor -->
+                            <a id="VisualizacionInternos" runat="server"
+                                class="collapse-item" href="VisualizacionInternos.aspx">Internos
+                            </a>
+                            <a id="Minutario" runat="server"
+                                class="collapse-item" href="BitacoraFolio.aspx">Minutario
+                            </a>
+                        </div>
+                    </div>
+                </li>
+                <!-- Reportes -->
+                <li runat="server" id="Reportes" class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseReportes"
+                       aria-expanded="false" aria-controls="collapseReportes">
+                        <i class="fas fa-fw fa-folder"></i>
+                        <span>Reportes</span>
+                    </a>
+
+                    <div id="collapseReportes" class="collapse" aria-labelledby="headingReportes"
+                         data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Reportes de oficios:</h6>
+
+                            <!-- ================== SUBMENÚ: OFICIOS EXTERNOS ================== -->
+                            <a class="collapse-item d-flex justify-content-between align-items-center"
+                               data-toggle="collapse" href="#submenuExternosReportes"
+                               role="button" aria-expanded="false" aria-controls="submenuExternosReportes">
+                                <span><i class="fas fa-envelope-open-text mr-1"></i> Oficios externos</span>
+                                <i class="fas fa-angle-down"></i>
+                            </a>
+
+                            <div class="collapse pl-3" id="submenuExternosReportes">
+                                <asp:LinkButton
+                                    ID="lnkDescargarGeneral"
+                                    runat="server"
+                                    CssClass="collapse-item small"
+                                    OnClick="btnDescargar_Click">
+                                    General (.xlsx)
+                                </asp:LinkButton>
+
+                                <a class="collapse-item small" href="#"
+                                   onclick="$('#modalPorFecha').modal('show'); return false;">
+                                    Por fecha (.xlsx)
+                                </a>
+
+                                <a class="collapse-item small" href="#"
+                                   onclick="$('#modalPorEstatus').modal('show'); return false;">
+                                    Por estatus (.xlsx)
+                                </a>
+
+                                <a class="collapse-item small" href="#"
+                                   onclick="$('#modalRelaciondeOficios').modal('show'); return false;">
+                                    Relación de oficios (Acuse)
+                                </a>
+
+                                <asp:LinkButton ID="lnkDescargarPendientes"
+                                    runat="server"
+                                    CssClass="collapse-item small"
+                                    OnClick="btnDescargarPendientes_Click">
+                                    Oficios pendientes
+                                </asp:LinkButton>
+
+                                <a class="collapse-item small" href="#"
+                                   onclick="$('#modalResumenDocumentos').modal('show'); return false;">
+                                    Resumen de documentos
+                                </a>
+                            </div>
+
+                            <div class="collapse-divider"></div>
+
+                            <!-- ================== SUBMENÚ: OFICIOS INTERNOS ================== -->
+                            <a class="collapse-item d-flex justify-content-between align-items-center"
+                               data-toggle="collapse" href="#submenuInternosReportes"
+                               role="button" aria-expanded="false" aria-controls="submenuInternosReportes">
+                                <span><i class="fas fa-file-alt mr-1"></i> Oficios internos</span>
+                                <i class="fas fa-angle-down"></i>
+                            </a>
+
+                            <div class="collapse pl-3" id="submenuInternosReportes">
+                                <%--<asp:LinkButton
+                                    ID="lnkDescargarGeneralInternos"
+                                    runat="server"
+                                    CssClass="collapse-item small"
+                                    OnClick="btnDescargarInternos_Click">
+                                    General (.xlsx)
+                                </asp:LinkButton>
+
+                                <a class="collapse-item small" href="#"
+                                   onclick="$('#modalPorFechaInternos').modal('show'); return false;">
+                                    Por fecha (.xlsx)
+                                </a>
+
+                                <a class="collapse-item small" href="#"
+                                   onclick="$('#modalPorEstatusInternos').modal('show'); return false;">
+                                    Por estatus (.xlsx)
+                                </a>--%>
+
+                                <asp:LinkButton
+                                    ID="lnkDescargarPendientesInternos"
+                                    runat="server"
+                                    CssClass="collapse-item small"
+                                    OnClick="btnDescargarPendientesInternos_Click">
+                                    Oficios pendientes
+                                </asp:LinkButton>
+
+                                <a class="collapse-item small" href="#"
+                                   onclick="$('#modalResumenDocumentosInternos').modal('show'); return false;">
+                                    Resumen de documentos
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+                </li>
+
+                <hr class="sidebar-divider" />
+                <!-- Documentación -->
+                <li class="nav-item">
+                    <a class="nav-link" href="charts.html">
+                        <i class="fas fa-fw fa-chart-area"></i>
+                        <span>Documentación</span>
+                    </a>
+                </li>
+                <!-- Ayuda -->
+                <li class="nav-item">
+                    <a class="nav-link" href="Ayuda.aspx">
+                        <i class="fas fa-fw fa-table"></i>
+                        <span>Ayuda</span>
+                    </a>
+                </li>
+            </ul>
+
+            <!-- End of Sidebar -->
+
+            <!-- Content Wrapper -->
+            <div id="content-wrapper" class="d-flex flex-column">
+
+                <!-- Main Content -->
+                <div id="content" runat="server" clientidmode="Static">
+
+                    <!-- Topbar -->
+                    <nav id="topbar" runat="server" class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                        <div class="sidebar-footer text-center mt-3">
+                            <img src="img/SDR.png" alt="SDR" class="img-fluid" style="width: 190px; height: 50px;" />
+                        </div>
+
+                        <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                            <i class="fa fa-bars"></i>
+                        </button>
+
+                        <ul class="navbar-nav ml-auto">
+                            <!-- Alerts -->
+                            <%-- <li class="nav-item dropdown no-arrow mx-1">
+                                <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-bell fa-fw"></i>
+                                    <span class="badge badge-danger badge-counter">3+</span>
+                                </a>
+                                <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                    aria-labelledby="alertsDropdown">
+                                    <h6 class="dropdown-header">Notificaciones</h6>
+                                    <a class="dropdown-item d-flex align-items-center" href="#">
+                                        <div class="mr-3">
+                                            <div class="icon-circle bg-primary">
+                                                <i class="fas fa-file-alt text-white"></i>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="small text-gray-500">19 Mayo de 2025</div>
+                                            <span class="font-weight-bold">¡Nuevo reporte disponible!</span>
+                                        </div>
+                                    </a>
+                                </div>
+                            </li>--%>
+
+                            <div class="topbar-divider d-none d-sm-block"></div>
+
+                            <!-- Usuario -->
+                            <li class="nav-item dropdown no-arrow">
+                                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span>Bienvenido</span>
+                                    <asp:Label runat="server" Font-Bold="true" ID="lblUsuario" CssClass="mr-2 d-none d-lg-inline text-gray-600 small" />
+                                    <asp:Label runat="server" ID="lblIDUsuario" Visible="false"></asp:Label>
+                                    <img class="img-profile rounded-circle" src="img/undraw_profile.svg" />
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                    aria-labelledby="userDropdown">
+                                    <a class="dropdown-item" href="#"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>Mi cuenta</a>
+                                    <a class="dropdown-item" href="#"><i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>Configuración</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Salir
+                                    </a>
+                                </div>
+                            </li>
+
+                        </ul>
+                    </nav>
+                    <!-- End of Topbar -->
+
+                    <!-- Page Content -->
+                    <div class="container-fluid">
+                        <asp:ContentPlaceHolder ID="cphContenido" runat="server" />
+                    </div>
+
+                </div>
+                <!-- End of Main Content -->
+
+                <!-- Footer -->
+                <footer runat="server" id="footer" class="sticky-footer bg-white">
+                    <div class="container my-auto">
+                        <div class="text-center my-auto">
+                            <span>© 2025 - SURO</span>
+                        </div>
+                    </div>
+                </footer>
+                <!-- End of Footer -->
+
+            </div>
+            <!-- End of Content Wrapper -->
+
+        </div>
+        <!-- End of Page Wrapper -->
+
+        <!-- Scroll to Top -->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
+
+        <!--Registro exitoso Modal-->
+        <div class="modal fade" id="myModalExito" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exito">Éxito</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">Registro Correcto.</div>
+                    <div class="modal-footer">
+                        <a class="btn btn-primary" href="Externos.aspx">Aceptar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!--Error de registro-->
+        <div class="modal fade" id="myModalError" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="error">Error</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">Ocurrió un error en el registro, favor de llamar a sistemas.</div>
+                    <div class="modal-footer">
+                        <a class="btn btn-primary" href="Externos.aspx">Aceptar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!--Modal Dinámico controlado desde el Script: Scripts/ModalScript.js-->
+        <div class="modal fade" id="modalMensaje" tabindex="-1" role="dialog" aria-labelledby="modalMensajeLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content custom-modal">
+                    <div class="modal-header custom-header">
+                        <h5 class="modal-title text-white" id="LoginError">
+                            <i class="bi bi-info-circle-fill me-2"></i>Aviso
+                        </h5>
+                        <button class="close text-white" type="button" data-bs-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body text-dark" id="modalMensajeContenido">
+                        <!-- Contenido dinámico -->
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <%-- Modal que muestra reportes por Estatus --%>
+        <div class="modal fade" id="modalPorEstatus" tabindex="-1" role="dialog" aria-labelledby="modalDocumentosPendientesLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalReporteEstatusLabel">Descargar Reporte por Fecha</h5>
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Cerrar">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-4">
+                            <asp:DropDownList ID="ddlEstatus" runat="server" CssClass="form-control d-inline-block w-auto">
+                                <asp:ListItem Text="Recibido" Value="1" />
+                                <asp:ListItem Text="Turnado" Value="2" />
+                                <asp:ListItem Text="Concluido" Value="3" />
+                                <asp:ListItem Text="Capturado" Value="4" />
+                                <asp:ListItem Text="En Proceso" Value="5" />
+                            </asp:DropDownList>
+                            <!-- Botón centrado debajo -->
+                            <div class="d-flex justify-content-center">
+                                <asp:Button ID="btonDescargaEstatus"
+                                    runat="server"
+                                    Text="Descargar Reporte"
+                                    CssClass="btn btn-success"
+                                    OnClick="btnDescargar_Click" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <!-- Modal: Relación de Oficios -->
+        <div class="modal fade" id="modalRelaciondeOficios" tabindex="-1" role="dialog" aria-labelledby="modalRelaciondeOficiosLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalRelaciondeOficiosLabel">Relación de Oficios (Acuse)</h5>
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Cerrar">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="mb-4">
+                            <asp:TextBox ID="txtRelacionInicio" runat="server" TextMode="Date" CssClass="form-control d-inline-block w-auto mb-2" />
+                            <asp:TextBox ID="txtRelacionFin" runat="server" TextMode="Date" CssClass="form-control d-inline-block w-auto mb-2" />
+                            <div id="msgRelacion" class="alert alert-danger text-center py-2 mb-3 d-none"></div>
+                            <div class="d-flex justify-content-center">
+                                <asp:Button ID="btnRelacionDescargar" runat="server"
+                                    Text="Descargar PDF"
+                                    CssClass="btn btn-success"
+                                    OnClick="btnRelacionDescargar_Click" />
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <!-- MODAL: Resumen de Documentos -->
+        <div class="modal fade" id="modalResumenDocumentos" tabindex="-1" role="dialog"
+            aria-labelledby="modalResumenDocumentosLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalResumenDocumentosLabel">Resumen de Documentos</h5>
+                        <!-- Si usas BS4: data-dismiss="modal"  |  Si usas BS5: data-bs-dismiss="modal" -->
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Cerrar">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+
+                        <div class="mb-4">
+                            <!-- Fechas -->
+                            <div class="d-flex flex-wrap align-items-center">
+                                <asp:TextBox ID="txtResumenInicio" runat="server" TextMode="Date"
+                                    CssClass="form-control d-inline-block w-auto mb-2 mr-2" />
+                                <asp:TextBox ID="txtResumenFin" runat="server" TextMode="Date"
+                                    CssClass="form-control d-inline-block w-auto mb-2" />
+                            </div>
+
+                            <!-- Checkbox: Con detalle -->
+                            <div class="align-items-center">
+                                <asp:CheckBox ID="chkConDetalle" runat="server" CssClass="form-check-input" />
+                                <!-- Importante: label asociado al ClientID renderizado -->
+                                <label class="form-check-label" for="<%= chkConDetalle.ClientID %>">Con detalle</label>
+                            </div>
+
+                            <!-- Mensaje -->
+                            <div id="msgResumen" class="alert alert-danger text-center py-2 mb-3 d-none"></div>
+
+                            <!-- Botón -->
+                            <div class="d-flex justify-content-center">
+                                <asp:Button ID="btnResumenDescargar" runat="server"
+                                    Text="Descargar PDF"
+                                    CssClass="btn btn-success"
+                                    OnClick="btnResumenDescargar_Click" />
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <%-- Muestra Modal por Fecha --%>
+        <div class="modal fade" id="modalPorFecha" tabindex="-1" role="dialog" aria-labelledby="modalDocumentosPendientesLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalReporteFechaLabel">Descargar Reporte por Fecha</h5>
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Cerrar">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-4">
+                            <!-- Solo un campo de fecha -->
+                            <asp:TextBox ID="txtFechaInicio" runat="server" TextMode="Date" placeholder="Fecha inicio" CssClass="form-control d-inline-block w-auto mb-2" />
+                            <!-- Los otros campos van ocultos -->
+                            <asp:TextBox ID="txtFechaFin" runat="server" TextMode="Date" placeholder="Fecha inicio" CssClass="form-control d-inline-block w-auto mb-2" />
+                            <!-- Mensaje de validación, inicialmente oculto -->
+                            <div id="msgValidacionFechas" class="alert alert-danger text-center py-2 mb-3 d-none"></div>
+                            <!-- Botón centrado debajo -->
+                            <div class="d-flex justify-content-center">
+                                <asp:Button ID="btnDescargarFecha"
+                                    runat="server"
+                                    Text="Descargar Reporte"
+                                    CssClass="btn btn-success"
+                                    OnClick="btnDescargar_Click"
+                                    OnClientClick="return validarFechasModal();" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ======================= MODALES INTERNOS AGREGADOS ======================= -->
+
+        <!-- Muestra Modal por Fecha - INTERNOS -->
+        <div class="modal fade" id="modalPorFechaInternos" tabindex="-1" role="dialog"
+             aria-labelledby="modalPorFechaInternosLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalPorFechaInternosLabel">Descargar reporte de oficios internos por fecha</h5>
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Cerrar">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="mb-4">
+                            <!-- Fechas -->
+                            <asp:TextBox ID="txtFechaInicioInternos" runat="server" TextMode="Date"
+                                CssClass="form-control d-inline-block w-auto mb-2" />
+                            <asp:TextBox ID="txtFechaFinInternos" runat="server" TextMode="Date"
+                                CssClass="form-control d-inline-block w-auto mb-2" />
+
+                            <!-- Mensaje de validación -->
+                            <div id="msgValidacionFechasInternos"
+                                 class="alert alert-danger text-center py-2 mb-3 d-none"></div>
+
+                            <!-- Botón -->
+                            <div class="d-flex justify-content-center">
+                                <asp:Button ID="btnDescargarFechaInternos"
+                                    runat="server"
+                                    Text="Descargar reporte"
+                                    CssClass="btn btn-success"
+                                    OnClick="btnDescargarInternosPorFecha_Click"
+                                    OnClientClick="return validarFechasModalInternos();" />
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal que muestra reportes por Estatus - INTERNOS -->
+        <div class="modal fade" id="modalPorEstatusInternos" tabindex="-1" role="dialog"
+             aria-labelledby="modalPorEstatusInternosLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalPorEstatusInternosLabel">Reporte de oficios internos por estatus</h5>
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Cerrar">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="mb-4">
+                            <asp:DropDownList ID="ddlEstatusInternos" runat="server"
+                                CssClass="form-control d-inline-block w-auto">
+                                <asp:ListItem Text="Recibido" Value="1" />
+                                <asp:ListItem Text="Turnado" Value="2" />
+                                <asp:ListItem Text="Concluido" Value="3" />
+                                <asp:ListItem Text="Capturado" Value="4" />
+                                <asp:ListItem Text="En Proceso" Value="5" />
+                            </asp:DropDownList>
+
+                            <div class="d-flex justify-content-center mt-3">
+                                <asp:Button ID="btonDescargaEstatusInternos"
+                                    runat="server"
+                                    Text="Descargar reporte"
+                                    CssClass="btn btn-success"
+                                    OnClick="btnDescargarInternosPorEstatus_Click" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- MODAL: Resumen de Documentos - INTERNOS -->
+        <div class="modal fade" id="modalResumenDocumentosInternos" tabindex="-1" role="dialog"
+             aria-labelledby="modalResumenDocumentosInternosLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalResumenDocumentosInternosLabel">Resumen de documentos internos</h5>
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Cerrar">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+
+                        <div class="mb-4">
+                            <!-- Fechas -->
+                            <div class="d-flex flex-wrap align-items-center">
+                                <asp:TextBox ID="txtResumenInicioInternos" runat="server" TextMode="Date"
+                                    CssClass="form-control d-inline-block w-auto mb-2 mr-2" />
+                                <asp:TextBox ID="txtResumenFinInternos" runat="server" TextMode="Date"
+                                    CssClass="form-control d-inline-block w-auto mb-2" />
+                            </div>
+
+                            <!-- Checkbox: Con detalle -->
+                            <div class="align-items-center mt-2">
+                                <asp:CheckBox ID="chkConDetalleInternos" runat="server" CssClass="form-check-input" />
+                                <label class="form-check-label" for="<%= chkConDetalleInternos.ClientID %>">
+                                    Con detalle
+                                </label>
+                            </div>
+
+                            <!-- Mensaje -->
+                            <div id="msgResumenInternos"
+                                 class="alert alert-danger text-center py-2 mb-3 d-none"></div>
+
+                            <!-- Botón -->
+                            <div class="d-flex justify-content-center">
+                                <asp:Button ID="btnResumenDescargarInternos" runat="server"
+                                    Text="Descargar PDF"
+                                    CssClass="btn btn-success"
+                                    OnClick="btnResumenInternosDescargar_Click" />
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- ======================= FIN MODALES INTERNOS AGREGADOS ======================= -->
+
+
+        <!-- Logout Modal-->
+        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">¿Seguro que quieres salir?</h5>
+                        <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">Selecciona "Salir" para cerrar tu sesión actual.</div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Cancelar</button>
+                        <a class="btn btn-primary" href="Logout.aspx">Salir</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <%--Modal que muestra la información del oficio seleccionado en el Gridview de Visualización--%>
+        <div class="modal fade" id="pdfModal" tabindex="-1" role="dialog" aria-labelledby="pdfModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document" style="max-width: 90vw;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="pdfModalLabel">Oficio</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                    </div>
+                    <div class="modal-body">
+                        <%-- Contenedor de mensaje de alerta --%>
+                        <div id="alertMessageContainer" class="alert d-none" role="alert"></div>
+
+                        <div id="fichaOficio" class="mb-3 p-3 border rounded bg-white shadow-sm">
+                            <h5 class='card-title'>Información del Oficio capturado</h5>
+                            <div class="row">
+                                <div id="divFolioCaptura" runat="server"  class="col-md-6 mb-2">
+                                    <i class="fas fa-file-alt text-primary"></i><strong>Folio Captura:</strong> <span id="fichaFolioCaptura"></span>
+                                </div>
+                                <div class="col-md-6 mb-2">
+                                    <i class="fas fa-file-alt text-primary"></i><strong>N° Oficio:</strong> <span id="fichaNumeroOficio"></span>
+                                </div>
+                                <div id="divFolioSecretario" runat="server" class="col-md-6 mb-2">
+                                    <i class="fas fa-hashtag text-primary"></i><strong>Folio Secretario:</strong> <span id="fichaFolioSecretario"></span>
+                                </div>
+                                <div class="col-md-6 mb-2">
+                                    <i class="fas fa-user text-primary"></i><strong class="ml-1">Remitente:</strong> <span id="fichaRemitente"></span>
+                                </div>
+                                <div id="divLugarRemitente" runat="server" class="col-md-6 mb-2">
+                                    <i class="fas fa-home text-primary"></i><strong>Lugar Remitente:</strong> <span id="fichaLugarRemitente"></span>
+                                </div>
+                                 <div class="col-md-6 mb-2">
+                                     <i class="fas fa-phone-alt text-primary"></i><strong>Teléfono del Remitente:</strong> <span id="fichaTelefono"></span>
+                                 </div>
+                                 <div class="col-md-6 mb-2">
+                                     <i class="fas fa-envelope text-primary"></i><strong>Correo del Remitente:</strong> <span id="fichaCorreo"></span>
+                                 </div>
+                                <div id="divMunicipio" runat="server" class="col-md-6 mb-2">
+                                    <i class="fas fa-map-marker-alt text-primary"></i><strong class="ml-1">Municipio:</strong> <span id="fichaMunicipio"></span>
+                                </div>
+                                <div id="divNivelAtencion" runat="server" class="col-md-6 mb-2">
+                                    <i class="fas fa-sliders-h text-primary"></i><strong>Nivel Atención:</strong> <span id="fichaNivelAtencion"></span>
+                                </div>
+                                <div class="col-md-6 mb-2">
+                                    <i class="fas fa-file-signature text-primary"></i><strong>Tipo Documento:</strong> <span id="fichaTipoDocumento"></span>
+                                </div>
+                                <div class="col-md-6 mb-2">
+                                    <i id="iconEstatus" class="fas fa-chart-line text-primary"></i><strong class="ml-1">Estatus:</strong> <span id="fichaEstatus"></span>
+                                </div>
+                                <div class="col-md-6 mb-2">
+                                    <i class="fas fa-file-alt text-primary"></i><strong>Asunto:</strong> <span id="fichaAsunto"></span>
+                                </div>
+                                <div class="col-md-6 mb-2">
+                                    <i class="fas fa-calendar-alt text-primary"></i><strong>Fecha del Oficio:</strong> <span id="fichaFechaOficio"></span>
+                                </div>
+                               
+                            </div>
+                        </div>
+
+
+
+
+                        <%-- UpdatePanel Principal para la lógica de Turnar y dar seguimiento a un oficio--%>
+                        <asp:UpdatePanel ID="upContenidoTurnar" UpdateMode="Conditional" runat="server">
+                            <ContentTemplate>
+                                <%-- Sección que muestra mensaje cuando un oficio ya fue concluido por el area/departamento pero la direccion aun no lo cierra --%>
+                                <div id="mensajeConlusion" runat="server" class="card shadow-lg p-4 mb-4 bg-light-subtle" clientidmode="Static" style="display: none;">
+                                    <div class="alert alert-warning text-center" role="alert">
+                                        <h5 class="alert-heading">¡Atención!</h5>
+                                        <p>El oficio está concluido por esta área, pero necesita cerrarse en un departamento.</p>
+
+                                    </div>
+                                </div>
+
+
+
+                                <%-- Sección que muestra cuando un oficio ya no puede turnarse más porque no tiene áreas para turnar --%>
+                                <div id="noTurno" runat="server" class="card shadow-lg p-4 mb-4 bg-light-subtle" clientidmode="Static" style="display: none;">
+                                    <h4 class="card-title text-primary mb-4">Finalización de Turnado</h4>
+                                    <div class="mb-3">
+                                        <label for="<%= txtObservacion.ClientID %>" class="form-label fw-bold">Observaciones:</label>
+                                        <asp:TextBox ID="txtObservacion" runat="server" TextMode="MultiLine" Rows="5" CssClass="form-control" PlaceHolder="Escribe aquí las observaciones..."></asp:TextBox>
+                                        <span id="errorTxtConcluir" class="text-danger" style="display: none;">Las notas de conclusión son requeridas.</span>
+                                    </div>
+
+                                    <div class="d-flex justify-content-end gap-2 mt-4">
+                                        <asp:Button ID="btnCancelaTermino" runat="server" Text="Cancelar" CssClass="btn btn-danger-subtle text-danger" OnClientClick="toggleConcluirSection(); return false;" />
+                                        <asp:Button ID="btnGuardaTermino" runat="server" Text="Guardar" CssClass="btn btn-success" OnClientClick="return validarConclusion();" OnClick="btnGuardaTermino_Click1" />
+                                    </div>
+                                </div>
+
+                                <%-- Literales de conocimiento y fecha atención --%>
+                                <div class="card p-4 mt-4">
+                                    <h5 class='card-title'>Información del Turnado</h5>
+                                    <div class="col-md-6 mb-3">
+                                        <div class="detail-item">
+                                            <asp:Literal runat="server" ID="FechaAtencion"></asp:Literal>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <div class="detail-item">
+                                            <asp:Literal ID="litFechaConocimiento" runat="server" Visible="false"></asp:Literal>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <asp:Literal ID="litConocimiento" runat="server" Visible="false"></asp:Literal></span>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="font-weight-bold">Turnado a:</label>
+                                        <div id="divDestinosTurnadosList" runat="server" class="turnados-list-container">
+                                        </div>
+                                    </div>
+                                    <%-- Termina  Literales de conocimiento y fecha atención --%>
+                                    <br />
+                                    <br />
+                                    <div class="d-flex justify-content-around mb-4">
+                                        <%-- Botón para la sección de dar seguimiento --%>
+                                        <asp:Button ID="btnMostrarSeguimiento" ClientIDMode="Static" runat="server" CssClass="btn btn-success btn-lg shadow-sm" Text="Agregar Seguimiento" OnClientClick="toggleSeguimientoSection(); return false;" />
+                                        <%-- Botón de turnar documento --%>
+                                        <asp:Button ID="btnMostrarTurno" ClientIDMode="Static" runat="server" CssClass="btn btn-warning btn-lg shadow-sm" Text="Turnar Documento" OnClientClick="toggleTurnarSection(); return false;" />
+                                        <%-- Botón para concluir un oficio --%>
+                                        <asp:Button ID="btnConcluir" ClientIDMode="Static" runat="server" CssClass="btn btn-danger btn-lg shadow-sm" Text="Concluir" OnClientClick="toggleConcluirSection(); return false;" />
+
+
+                                    </div>
+
+
+
+
+                                    <%-- SECCIÓN PARA AGREGAR SEGUIMIENTO (inicialmente oculta por CSS) --%>
+                                    <div id="seccionSeguimiento" runat="server" class="card shadow-lg p-4 mb-4 bg-light-subtle" clientidmode="Static" style="display: none;">
+                                        <h4 class="card-title text-primary mb-4">Registro de Seguimiento</h4>
+                                        <div class="mb-3">
+                                            <label for="<%= txtSeguimiento.ClientID %>" class="form-label fw-bold">Notas de Seguimiento:</label>
+                                            <asp:TextBox ID="txtSeguimiento" runat="server" TextMode="MultiLine" Rows="5" CssClass="form-control" PlaceHolder="Escribe aquí las notas del seguimiento..."></asp:TextBox>
+                                            <span id="errorTxtSeguimiento" class="text-danger" style="display: none;">Las notas de seguimiento son requeridas.</span>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="<%= fuArchivoPdf.ClientID %>" class="form-label fw-bold">Adjuntar Archivo PDF:</label>
+                                            <asp:FileUpload ID="fuArchivoPdf" runat="server" CssClass="form-control" Accept=".pdf" />
+                                            <div class="form-text">Solo se permiten archivos PDF.</div>
+                                            <span id="errorArchivoPdf" class="text-danger" style="display: none;">Debe adjuntar un archivo PDF.</span>
+                                        </div>
+                                        <div class="d-flex justify-content-end gap-2 mt-4">
+                                            <asp:Button ID="btnCancelarSeguimiento" runat="server" Text="Cancelar" CssClass="btn btn-danger-subtle text-danger" OnClientClick="toggleSeguimientoSection(); return false;" />
+                                            <asp:Button ID="btnGuardarSeguimiento" runat="server" Text="Guardar Seguimiento" OnClientClick="return validarSeguimiento();" CssClass="btn btn-success" OnClick="btnGuardarSeguimiento_Click" />
+                                            <%------%>
+                                        </div>
+                                    </div>
+
+
+
+                                    <%-- SECCIÓN PARA TURNAR DOCUMENTO --%>
+                                    <div id="seccionTurnar" runat="server" clientidmode="Static" class="card shadow-lg p-4 mb-4 bg-light-subtle" style="display: none;">
+                                        <h4 class="card-title text-primary mb-4">Seleccionar Destinatario</h4>
+                                        <div class="row g-3">
+                                            <%-- Usamos g-3 para un espaciado consistente entre columnas --%>
+                                            <asp:Panel runat="server" ID="pnlDestinos1" CssClass="col-12">
+                                                <div class="row g-3">
+                                                    <%-- Controles para Dirección, Departamento y Área --%>
+                                                    <div class="col-md-4" id="divDireccion" runat="server" visible="false">
+                                                        <label for="ddlDireccion1" class="form-label fw-bold">Dirección:</label>
+                                                        <asp:DropDownList ID="ddlDireccion1" ClientIDMode="Static" runat="server" OnSelectedIndexChanged="ddlDireccion1_SelectedIndexChanged1" AutoPostBack="true" CssClass="form-select" />
+                                                    </div>
+                                                    <!-- NUEVO: texto extra solo para Dirección = 12 -->
+                                                    <div id="divTextoDireccion12" class="col-md-12 mb-2" style="display: none;">
+                                                        <label class="form-label" for="<%= txtTextoDireccion12.ClientID %>">
+                                                            Destinatario Externo:
+                                                        </label>
+                                                        <asp:TextBox ID="txtTextoDireccion12" runat="server"
+                                                            CssClass="form-control"
+                                                            TextMode="MultiLine"
+                                                            Rows="2"
+                                                            MaxLength="500" />
+                                                    </div>
+                                                    <div class="col-md-4" id="divDepartamento1" runat="server" visible="false">
+                                                        <label for="ddlDepartamento1" class="form-label fw-bold">Departamento:</label>
+                                                        <asp:DropDownList ID="ddlDepartamento1" ClientIDMode="Static" runat="server" AutoPostBack="true" CssClass="form-select" OnSelectedIndexChanged="ddlDepartamento1_SelectedIndexChanged" />
+                                                    </div>
+                                                    <div class="col-md-4" id="divArea1" runat="server" visible="false">
+                                                        <label for="ddlArea1" class="form-label fw-bold">Área:</label>
+                                                        <asp:DropDownList ID="ddlArea1" ClientIDMode="Static" runat="server" AutoPostBack="true" CssClass="form-select" OnSelectedIndexChanged="ddlArea1_SelectedIndexChanged" />
+                                                    </div>
+                                                </div>
+                                            </asp:Panel>
+                                        </div>
+
+                                        <div class="d-flex justify-content-end mt-4">
+                                            <asp:Button ID="btnAgregarDestino" runat="server" CssClass="btn btn-outline-primary me-2" Text="Agregar Destino" OnClientClick="agregarDestino(); return false;" />
+                                        </div>
+
+                                        <div id="divTurnadoA" runat="server" class="mt-4 border-top pt-3">
+                                            <div id="lblTurnadoA" clientidmode="Static" runat="server" style="display: none; font-weight: bold; margin-bottom: 0.5rem;" class="text-secondary">
+                                                Turnado a:
+                                            </div>
+                                            <div id="destinosAgregados" clientidmode="Static" runat="server" class="d-flex flex-wrap gap-2">
+                                                <%-- Aquí se agregarán dinámicamente los destinos --%>
+                                            </div>
+                                        </div>
+
+                                        <div class="d-flex justify-content-end gap-2 mt-5">
+                                            <asp:Button ID="btnCancelarTurno" runat="server" Text="Cancelar" CssClass="btn btn-danger-subtle text-danger" OnClientClick="ocultarSeccionTurnar(); return false;" Style="display: none;" />
+                                            <asp:Button ID="btnConfirmarTurno" runat="server" Text="Confirmar Turno" CssClass="btn btn-success" OnClick="btnConfirmarTurno_Click" Style="display: none;" />
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-md-6 mb-2">
+                                        <%-- Mantener vacío para alineación si es necesario --%>
+                                    </div>
+                                    <div runat="server" id="divChekbox" class="col-md-6 mb-2">
+                                    </div>
+                                </div>
+                                <%-- FIN SECCIÓN TURNAR --%>
+
+                                <!-- MODAL: Reporte Por fecha -->
+                                <%-- <div class="modal fade" id="modalPorFecha" tabindex="-1" role="dialog" aria-labelledby="modalDocumentosPendientesLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <contenttemplate>
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="modalReporteFechaLabel">Descargar Reporte por Fecha</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="mb-4">
+                                                        <!-- Solo un campo de fecha -->
+                                                        <asp:TextBox ID="txtFechaInicio" runat="server" TextMode="Date" placeholder="Fecha inicio" CssClass="form-control d-inline-block w-auto mb-2" />
+                                                        <!-- Los otros campos van ocultos -->
+                                                        <asp:TextBox ID="txtFechaFin" runat="server" TextMode="Date" placeholder="Fecha inicio" CssClass="form-control d-inline-block w-auto mb-2" />
+                                                        <!-- Mensaje de validación, inicialmente oculto -->
+                                                        <div id="msgValidacionFechas" class="alert alert-danger text-center py-2 mb-3 d-none"></div>
+                                                        <!-- Botón centrado debajo -->
+                                                        <div class="d-flex justify-content-center">
+                                                            <asp:Button ID="btnDescargarFecha"
+                                                                runat="server"
+                                                                Text="Descargar Reporte"
+                                                                CssClass="btn btn-success"
+                                                                OnClick="btnDescargar_Click"
+                                                                OnClientClick="return validarFechasModal();" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </contenttemplate>
+                                    </div>
+                                </div>--%>
+
+                                <!--MODAL: Reporte por Estatus -->
+                                <%--  <div class="modal fade" id="modalPorEstatus" tabindex="-1" role="dialog" aria-labelledby="modalDocumentosPendientesLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <contenttemplate>
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="modalReporteEstatusLabel">Descargar Reporte por Fecha</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="mb-4">
+                                                        <asp:DropDownList ID="ddlEstatus" runat="server" CssClass="form-control d-inline-block w-auto">
+                                                            <asp:ListItem Text="Pendiente" Value="1" />
+                                                            <asp:ListItem Text="Turnado" Value="2" />
+                                                            <asp:ListItem Text="Concluido" Value="3" />
+                                                            <asp:ListItem Text="Capturado" Value="4" />
+                                                        </asp:DropDownList>
+                                                        <!-- Botón centrado debajo -->
+                                                        <div class="d-flex justify-content-center">
+                                                            <asp:Button ID="btonDescargaEstatus"
+                                                                runat="server"
+                                                                Text="Descargar Reporte"
+                                                                CssClass="btn btn-success"
+                                                                OnClick="btnDescargar_Click" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </contenttemplate>
+                                    </div>
+                                </div>--%>
+
+
+                                <%-- Historial de conclusiones del oficio --%>
+                                <asp:Literal ID="LitNotasConclusion" runat="server"></asp:Literal>
+
+
+                                <%-- Historial del seguimiento del oficio --%>
+                                <asp:Literal ID="LitSeguimientosHistorial" runat="server"></asp:Literal>
+
+
+
+
+
+                                <asp:HiddenField ID="hfEstatus" runat="server" />
+                                <asp:HiddenField ID="hfTipoOrg" runat="server" />
+                                <asp:HiddenField ID="hfTipoOrgDestino" runat="server" />
+                                <asp:HiddenField ID="hfDestinos" ClientIDMode="Static" Value="" runat="server" />
+                            </ContentTemplate>
+                            <Triggers>
+                                <asp:PostBackTrigger ControlID="btnGuardarSeguimiento" />
+                                <asp:AsyncPostBackTrigger ControlID="btnMostrarTurno" EventName="Click" />
+                                <asp:AsyncPostBackTrigger ControlID="ddlDireccion1" EventName="SelectedIndexChanged" />
+                                <asp:AsyncPostBackTrigger ControlID="ddlDepartamento1" EventName="SelectedIndexChanged" />
+                                <asp:AsyncPostBackTrigger ControlID="ddlArea1" EventName="SelectedIndexChanged" />
+                            </Triggers>
+                        </asp:UpdatePanel>
+
+                        <br />
+                        <br />
+                        <iframe id="pdfFrame" src="" frameborder="0" style="width: 100%; height: 80vh;"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Scripts -->
+        <script src="vendor/jquery/jquery.min.js"></script>
+        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="js/sb-admin-2.min.js"></script>
+        <!-- Core plugin JavaScript-->
+        <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                var modal = document.getElementById("modalRelaciondeOficios");
+                modal.addEventListener('show.bs.modal', function () {
+                    let hoy = new Date().toISOString().split('T')[0];
+                    document.getElementById("<%= txtRelacionInicio.ClientID %>").value = hoy;
+                    document.getElementById("<%= txtRelacionFin.ClientID %>").value = hoy;
+                });
+            });
+        </script>
+
+
+
+
+
+        <script>
+
+            // Declaración global
+            var destinos = [];
+
+
+
+            function pageLoad(sender, args) {
+                console.log("DEBUG: pageLoad ejecutado. Partial Load:", args.get_isPartialLoad());
+
+                const seccionTurnarElement = document.getElementById('<%= seccionTurnar.ClientID %>');
+
+                // Solo si el elemento seccionTurnar está en el DOM y visible (no display: none)
+                // se intenta actualizar los destinos.
+                // Esto ocurrirá cuando btnMostrarTurno_Click lo haga visible en C#.
+                if (seccionTurnarElement && seccionTurnarElement.offsetParent !== null) { // offsetParent !== null verifica si el elemento está visible y renderizado
+                    console.log("DEBUG: seccionTurnar está visible. Preparando llamada a actualizarDestinosUI().");
+                    setTimeout(function () {
+                        actualizarDestinosUI();
+                    }, 100);
+                } else {
+                    console.log("DEBUG: seccionTurnar NO está visible. No se llamará actualizarDestinosUI().");
+                }
+            }
+
+
+
+
+
+            // Función para inicializar/cargar los destinos desde el HiddenField
+            function cargarDestinosDesdeHiddenField() {
+                const hfDestinosValue = $('#<%= hfDestinos.ClientID %>').val();
+
+
+
+                if (hfDestinosValue) {
+
+
+                    try {
+                        destinos = JSON.parse(hfDestinosValue);
+                        if (!Array.isArray(destinos)) {
+                            destinos = [];
+                        }
+                    } catch (e) {
+                        console.error("Error al parsear destinos desde hfDestinos:", e);
+                        destinos = [];
+                    }
+                } else {
+                    destinos = [];// Si el HiddenField está vacío, el array de destinos también lo está
+                }
+                console.log("DEBUG: Destinos cargados desde HF:", destinos); // Agrega este log
+            }
+
+            $(document).ready(function () {
+                cargarDestinosDesdeHiddenField();
+                actualizarDestinosUI(); // Muestra cualquier destino que ya estuviera guardado
+            });
+            if (typeof Sys !== 'undefined' && Sys.WebForms && Sys.WebForms.PageRequestManager) {
+                Sys.WebForms.PageRequestManager.getInstance().add_endRequest(function (sender, args) {
+                    cargarDestinosDesdeHiddenField(); // Vuelve a cargar los destinos
+                    actualizarDestinosUI(); // Vuelve a renderizar la UI
+                });
+            }
+
+
+            function limpiarModalTurnado() {
+                // Limpiar HiddenField
+                $('#<%= hfDestinos.ClientID %>').val('[]');
+
+
+                // Limpiar campos del formulario
+                $('#<%= FechaAtencion.ClientID %>').val('');
+               <%-- $('#<%= chkActivo.ClientID %>').prop('checked', false);--%>
+
+                // Limpiar el contenedor de mensajes de alerta
+                $('#alertMessageContainer').empty();
+                $('.alert-success, .alert-danger').remove(); // Eliminar cualquier alerta dinámica si las añades con clases
+
+
+                // Si tienes funciones para actualizar la UI de destinos, llámalas aquí
+                if (typeof actualizarDestinosUI === 'function') {
+                    actualizarDestinosUI(); // Asumiendo que esto limpia los badges, etc.
+                }
+
+                // Opcional: Cerrar el modal si lo necesitas después de un éxito completo, aunque el usuario
+                // podría querer revisar el éxito antes de que se cierre.
+                // $('#miModalDeOficio').modal('hide');
+            }
+
+            $(document).ready(function () {
+                // Evento cuando el modal se oculta completamente
+                $('#pdfModal').on('hidden.bs.modal', function () {
+                    // Limpia el modal después de que se ha cerrado
+                    limpiarModalTurnado();
+                });
+
+                $('#pdfModal').on('shown.bs.modal', function () {
+
+                });
+            });
+
+            function agregarDestino() {
+                cargarDestinosDesdeHiddenField();
+
+                let tipoUsuario = parseInt($('#<%= hfTipoOrg.ClientID %>').val());
+                let tipoOrgDestino = parseInt($('#<%= hfTipoOrgDestino.ClientID %>').val());
+
+                const ddlDireccion = $('#<%= ddlDireccion1.ClientID %>');
+                const ddlDepartamento = $('#<%= ddlDepartamento1.ClientID %>');
+                const ddlArea = $('#<%= ddlArea1.ClientID %>');
+
+                let destinosAgregar = [];
+
+                if (window.location.pathname.toLowerCase().includes("visualizacioninternos")) {
+
+                    const idDir = ddlDireccion.val();
+                    const txtDir = ddlDireccion.find("option:selected").text();
+
+                    const idDep = ddlDepartamento.val();
+                    const txtDep = ddlDepartamento.find("option:selected").text();
+
+                    const idArea = ddlArea.val();
+                    const txtArea = ddlArea.find("option:selected").text();
+
+                    if (idDir && idDir !== "0") destinosAgregar.push({ id: idDir, nombre: txtDir, tipo: 2 });
+                    if (idDep && idDep !== "0") destinosAgregar.push({ id: idDep, nombre: txtDep, tipo: 3 });
+                    if (idArea && idArea !== "0") destinosAgregar.push({ id: idArea, nombre: txtArea, tipo: 4 });
+
+                    if (destinosAgregar.length === 0) {
+                        mostrarAlertaEnModal("Por favor, selecciona al menos un destino válido (Dirección, Departamento o Área).");
+                        return;
+                    }
+
+                    destinosAgregar.forEach(d => {
+                        if (!destinos.some(x => x.id === d.id && x.tipo === d.tipo)) {
+                            destinos.push(d);
+                        }
+                    });
+
+                    //  Guardar en el HiddenField
+                    $('#<%= hfDestinos.ClientID %>').val(JSON.stringify(destinos));
+
+                    console.log("DEBUG INTERNOS: hfDestinos actualizado:", $('#<%= hfDestinos.ClientID %>').val());
+
+                    //  Actualiza la UI
+                    actualizarDestinosUI();
+
+                    //  Reinicia selects 
+                    ddlDireccion.val('0');
+                    ddlDepartamento.val('0');
+                    ddlArea.val('0');
+
+                } else {
+
+
+
+                    let destinoTexto = "";
+                    let idDestino = "";
+                    let ddl = null;
+
+                    if (tipoUsuario === 1 || tipoUsuario === 2) {
+                        ddl = $('#<%= ddlDireccion1.ClientID  %>');
+                    } else if (tipoUsuario === 3) {
+                        ddl = $('#<%= ddlDepartamento1.ClientID %>');
+                    } else if (tipoUsuario === 4) {
+                        ddl = $('#<%= ddlArea1.ClientID %>');
+                    } else {
+                        console.error("Tipo de usuario no válido para agregar destino:", tipoUsuario);
+                        mostrarAlertaEnModal("Error interno: Tipo de usuario para el turno no reconocido.");
+                        return;
+                    }
+
+                    if (ddl === null || ddl.length === 0) {
+                        console.error("No se pudo encontrar el DropDownList para el tipo de usuario:", tipoUsuario);
+                        mostrarAlertaEnModal("Error interno: No se pudo identificar el control del destino.");
+                        return;
+                    }
+
+
+                    // Obtener valores del DDL seleccionado
+                    destinoTexto = ddl.find("option:selected").text();
+                    idDestino = ddl.val();
+
+
+                    //// Validación que te da el error "Por favor, selecciona un destino válido."
+                    //if (idDestino === "0" || !idDestino || !destinoTexto || destinoTexto.includes("--Seleccione")) {
+                    //    mostrarAlertaEnModal("Por favor, selecciona un destino válido.");
+                    //    return;
+                    //}
+
+                    let destinoSeleccionado = { id: idDestino, nombre: destinoTexto, tipo: tipoOrgDestino };
+
+                    if (destinos.some(d => d.id === destinoSeleccionado.id && d.tipo === destinoSeleccionado.tipo)) {
+                        mostrarAlertaEnModal("Este destinatario ya está agregado.");
+                        return;
+                    }
+
+                    if (destinos.length >= 3) {
+                        mostrarAlertaEnModal("Solo se pueden agregar un máximo de 3 destinatarios.");
+                        return;
+                    }
+                    destinos.push(destinoSeleccionado);
+
+
+                    $('#<%= hfDestinos.ClientID %>').val(JSON.stringify(destinos));
+                    console.log("DEBUG: Destino agregado. Nuevo array 'destinos':", destinos);
+                    console.log("DEBUG: hfDestinos.value después de agregar:", $('#<%= hfDestinos.ClientID %>').val());
+
+                    actualizarDestinosUI();
+
+
+                    if (ddl.length > 0) {
+                        ddl.val('0');
+                    }
+                }
+            }
+            /**
+                * Actualiza el texto y el estilo de un badge o icono de estatus.
+                * @param {string} estatus - El estatus del oficio (ej. "Concluido", "Turnado", "Pendiente").
+                */
+            function actualizarIconoEstatus(estatus) {
+                const estatusElement = document.getElementById('fichaEstatus'); // Usamos el ID del elemento HTML
+
+                if (!estatusElement) {
+                    console.warn("Elemento 'fichaEstatus' no encontrado en el DOM.");
+                    return;
+                }
+
+                // Limpiar clases previas
+                estatusElement.className = 'badge'; // Reinicia a la clase base 'badge'
+
+                // Convertir el estatus a minúsculas para comparaciones consistentes
+                const estatusLower = estatus.toLowerCase();
+
+                // Asignar clases y texto según el estatus
+                switch (estatusLower) {
+                    case 'concluido':
+                        estatusElement.classList.add('bg-success'); // Fondo verde para concluido
+                        estatusElement.textContent = 'Concluido';
+                        break;
+                    case 'turnado':
+                        estatusElement.classList.add('bg-primary'); // Fondo azul para turnado
+                        estatusElement.textContent = 'Turnado';
+                        break;
+                    case 'pendiente':
+                        estatusElement.classList.add('bg-warning', 'text-dark'); // Fondo amarillo, texto oscuro para pendiente
+                        estatusElement.textContent = 'Pendiente';
+                        break;
+                    case 'en proceso':
+                        estatusElement.classList.add('bg-info', 'text-dark'); // Fondo celeste, texto oscuro
+                        estatusElement.textContent = 'En Proceso';
+                        break;
+                    // Añade más casos según los estatus que manejes
+                    default:
+                        estatusElement.classList.add('bg-secondary'); // Fondo gris por defecto
+                        estatusElement.textContent = estatus; // Mostrar el estatus tal cual
+                        break;
+                }
+            }
+
+            function eliminarDestino(index) {
+                cargarDestinosDesdeHiddenField();
+
+                if (index >= 0 && index < destinos.length) {
+                    destinos.splice(index, 1); // Elimina el elemento en el índice dado
+
+
+                    $('#<%= hfDestinos.ClientID %>').val(JSON.stringify(destinos));
+
+
+                    actualizarDestinosUI(); // Vuelve a renderizar la UI con los destinos actualizados
+                }
+            }
+
+            function actualizarDestinosUI() {
+                const container = document.getElementById("destinosAgregados");
+                const label = document.getElementById("lblTurnadoA");
+
+                if (!container) {
+                    console.error("No se encontró el contenedor de destinos 'destinosAgregados'.");
+                    return;
+                }
+
+                container.innerHTML = "";
+
+                if (label) {
+                    label.style.display = destinos.length > 0 ? "block" : "none";
+                }
+
+                console.log("DEBUG: Actualizando UI con", destinos.length, "destinos.");
+
+                // ===============================
+                // 🔹 MODO INTERNOS (UNA SOLA LÍNEA)
+                // ===============================
+                if (window.location.pathname.toLowerCase().includes("visualizacioninternos")) {
+                    let dir = destinos.find(d => d.tipo === 2);
+                    let dep = destinos.find(d => d.tipo === 3);
+                    let area = destinos.find(d => d.tipo === 4);
+
+                    let texto = "";
+                    if (dir) texto += dir.nombre;
+                    if (dep) texto += (texto ? " / " : "") + dep.nombre;
+                    if (area) texto += (texto ? " / " : "") + area.nombre;
+
+                    if (!texto) return;
+
+                    const destinoItemDiv = document.createElement("div");
+                    destinoItemDiv.className = "d-flex align-items-center flex-wrap mb-2";
+
+                    // --- Badge combinado ---
+                    const span = document.createElement("span");
+                    span.className = "badge bg-primary text-white d-flex align-items-center p-2 me-2 mb-2 rounded-pill";
+                    span.appendChild(document.createTextNode(texto));
+
+                    // Botón eliminar (elimina los tres turnos internos)
+                    const removeButton = document.createElement("button");
+                    removeButton.type = "button";
+                    removeButton.className = "btn-close btn-close-white ms-2";
+                    removeButton.setAttribute("aria-label", "Eliminar");
+                    removeButton.onclick = function () {
+                        destinos = destinos.filter(d => d.tipo < 2 || d.tipo > 4);
+                        actualizarHiddenFieldDestinos();
+                        actualizarDestinosUI();
+                    };
+
+                    span.appendChild(removeButton);
+                    destinoItemDiv.appendChild(span);
+
+                    // --- Checkbox "Para conocimiento" ---
+                    const checkboxDiv = document.createElement("div");
+                    checkboxDiv.className = "form-check form-check-inline ms-2";
+
+                    const checkboxInput = document.createElement("input");
+                    checkboxInput.type = "checkbox";
+                    checkboxInput.className = "form-check-input";
+                    checkboxInput.id = "chkConocimiento_interno";
+                    checkboxInput.checked = dir?.ParaConocimiento || dep?.ParaConocimiento || area?.ParaConocimiento || false;
+                    checkboxInput.onchange = function () {
+                        destinos.forEach(d => {
+                            if (d.tipo >= 2 && d.tipo <= 4) d.ParaConocimiento = this.checked;
+                        });
+                        actualizarHiddenFieldDestinos();
+                    };
+
+                    const checkboxLabel = document.createElement("label");
+                    checkboxLabel.className = "form-check-label";
+                    checkboxLabel.htmlFor = "chkConocimiento_interno";
+                    checkboxLabel.textContent = "Para conocimiento";
+
+                    checkboxDiv.appendChild(checkboxInput);
+                    checkboxDiv.appendChild(checkboxLabel);
+                    destinoItemDiv.appendChild(checkboxDiv);
+
+                    // --- Campo de fecha ---
+                    const fechaDiv = document.createElement("div");
+                    fechaDiv.className = "ms-2";
+
+                    const fechaInput = document.createElement("input");
+                    fechaInput.type = "date";
+                    fechaInput.className = "form-control form-control-sm";
+                    fechaInput.style.width = "auto";
+                    fechaInput.id = "fechaDestino_interno";
+                    fechaInput.value = dir?.FechaMaxAtencion || dep?.FechaMaxAtencion || area?.FechaMaxAtencion || "";
+                    fechaInput.onchange = function () {
+                        destinos.forEach(d => {
+                            if (d.tipo >= 2 && d.tipo <= 4) d.FechaMaxAtencion = this.value;
+                        });
+                        actualizarHiddenFieldDestinos();
+                    };
+
+                    const fechaLabel = document.createElement("label");
+                    fechaLabel.className = "form-label ms-1 mb-0";
+                    fechaLabel.htmlFor = "fechaDestino_interno";
+                    fechaLabel.textContent = "Fecha máxima de atención:";
+
+                    fechaDiv.appendChild(fechaLabel);
+                    fechaDiv.appendChild(fechaInput);
+                    destinoItemDiv.appendChild(fechaDiv);
+
+                    container.appendChild(destinoItemDiv);
+                    return; // 🔹 Detenemos la función completa
+                }
+
+                // ===============================
+                // 🔸 MODO EXTERNOS (NORMAL)
+                // ===============================
+                destinos.forEach((destino, index) => {
+                    const destinoItemDiv = document.createElement("div");
+                    destinoItemDiv.className = "d-flex align-items-center mb-2 me-3";
+                    destinoItemDiv.setAttribute("data-index", index);
+
+                    const tipoTexto =
+                        destino.tipo === 2 ? "Dirección" :
+                            destino.tipo === 3 ? "Departamento" :
+                                destino.tipo === 4 ? "Área" : "Otro";
+                    // --- Badge principal ---
+                    const span = document.createElement("span");
+                    span.className = "badge bg-primary text-white d-flex align-items-center p-2 me-2 mb-2 rounded-pill";
+                    span.appendChild(document.createTextNode(`${tipoTexto}: ${destino.nombre}`));
+                    // --- Botón eliminar ---
+                    const removeButton = document.createElement("button");
+                    removeButton.type = "button";
+                    removeButton.className = "btn-close btn-close-white ms-2";
+                    removeButton.setAttribute("aria-label", "Eliminar");
+                    removeButton.dataset.index = index;
+                    removeButton.onclick = function () {
+                        eliminarDestino(parseInt(this.dataset.index));
+                    };
+
+                    span.appendChild(removeButton);
+                    destinoItemDiv.appendChild(span);
+
+
+                    // --- Checkbox "Para conocimiento" ---
+                    const checkboxDiv = document.createElement("div");
+                    checkboxDiv.className = "form-check form-check-inline ms-2 mb-2";
+
+                    const checkboxInput = document.createElement("input");
+                    checkboxInput.type = "checkbox";
+                    checkboxInput.className = "form-check-input";
+                    checkboxInput.id = `chkConocimiento_${index}`;
+                    checkboxInput.checked = destino.ParaConocimiento || false;
+                    checkboxInput.onchange = function () {
+                        destino.ParaConocimiento = this.checked;
+                        actualizarHiddenFieldDestinos();
+                    };
+
+                    const checkboxLabel = document.createElement("label");
+                    checkboxLabel.className = "form-check-label";
+                    checkboxLabel.htmlFor = `chkConocimiento_${index}`;
+                    checkboxLabel.textContent = "Para conocimiento";
+
+                    checkboxDiv.appendChild(checkboxInput);
+                    checkboxDiv.appendChild(checkboxLabel);
+                    destinoItemDiv.appendChild(checkboxDiv);
+
+                    // --- Campo "Fecha máxima de atención" ---
+                    const fechaDiv = document.createElement("div");
+                    fechaDiv.className = "ms-2 mb-2";
+
+                    const fechaLabel = document.createElement("label");
+                    fechaLabel.className = "form-label ms-1 mb-0";
+                    fechaLabel.htmlFor = `fechaDestino_${index}`;
+                    fechaLabel.textContent = "Fecha máxima de atención:";
+
+                    const fechaInput = document.createElement("input");
+                    fechaInput.type = "date";
+                    fechaInput.className = "form-control form-control-sm";
+                    fechaInput.style.width = "auto";
+                    fechaInput.id = `fechaDestino_${index}`;
+                    fechaInput.value = destino.FechaMaxAtencion || "";
+                    fechaInput.onchange = function () {
+                        destino.FechaMaxAtencion = this.value;
+                        actualizarHiddenFieldDestinos();
+                    };
+
+                    fechaDiv.appendChild(fechaLabel);
+                    fechaDiv.appendChild(fechaInput);
+                    destinoItemDiv.appendChild(fechaDiv);
+
+                    // --- Añadir al contenedor ---
+                    container.appendChild(destinoItemDiv);
+
+                });
+            }
+            
+
+
+
+
+
+
+
+            function actualizarHiddenFieldDestinos() {
+                const hfDestinos = document.getElementById('<%= hfDestinos.ClientID %>');
+                if (hfDestinos) {
+                    hfDestinos.value = JSON.stringify(destinos);
+                    console.log("DEBUG: hfDestinos.value actualizado:", hfDestinos.value);
+                } else {
+                    console.error("No se encontró el HiddenField 'hfDestinos'.");
+                }
+            }
+
+
+            function mostrarAlertaEnModal(mensaje, tipo = 'danger') { // tipo puede ser 'danger', 'warning', 'info', 'success'
+                console.log("mostrarAlertaEnModal ha sido llamada con el mensaje:", mensaje);
+                const alertContainer = document.getElementById('alertMessageContainer');
+                const modalElement = document.getElementById('pdfModal'); // Obtén una referencia a tu modal principal
+
+                if (alertContainer && modalElement) {
+                    alertContainer.innerText = mensaje;
+
+                    // Limpia clases de tipo anteriores y añade la nueva
+                    alertContainer.classList.remove('alert-danger', 'alert-warning', 'alert-info', 'alert-success');
+                    alertContainer.classList.add(`alert-${tipo}`);
+
+                    alertContainer.classList.remove('d-none');
+                    alertContainer.classList.add('d-block');
+
+                    // --- Aplicar animación de vibración al modal ---
+                    modalElement.classList.add('shake-animation');
+
+                    // Remover la clase de animación después de que termine
+                    // El tiempo (820 ms) debe coincidir con la duración de la animación en el CSS (0.82s)
+                    setTimeout(() => {
+                        modalElement.classList.remove('shake-animation');
+                    }, 820); // 0.82 segundos = 820 milisegundos
+                }
+            }
+
+            // Función para ocultar el mensaje de alerta dentro del modal
+            function ocultarAlertaEnModal() {
+                const container = document.getElementById('alertMessageContainer');
+                if (container) {
+                    container.style.display = 'none';
+                    container.innerHTML = '';
+                }
+            }
+
+   
+
+            function resetearDropDownLists() {
+                // Obtén una referencia a cada DropDownList usando su ClientID generado por ASP.NET.
+                // Es crucial que estos DDLs siempre estén renderizados en el HTML (no usar Visible=false en C#).
+
+                const ddlDireccion = document.getElementById('<%= ddlDireccion1.ClientID %>');
+                if (ddlDireccion) {
+                    // Establece el valor del DropDownList a '0', que debe corresponder al valor de "--Seleccione--".
+                    ddlDireccion.value = '0';
+                }
+
+                const ddlDepartamento = document.getElementById('<%= ddlDepartamento1.ClientID %>');
+                if (ddlDepartamento) {
+                    ddlDepartamento.value = '0';
+                }
+
+                const ddlArea = document.getElementById('<%= ddlArea1.ClientID %>');
+                if (ddlArea) {
+                    ddlArea.value = '0';
+                }
+            }
+
+
+
+
+
+
+
+            function toggleSeguimientoSection() {
+                var seccionSeguimiento = document.getElementById('seccionSeguimiento');
+                var btnMostrarSeguimiento = document.getElementById('btnMostrarSeguimiento');
+                var txtSeguimiento = document.getElementById('<%= txtSeguimiento.ClientID %>');
+
+                if (seccionSeguimiento.style.display === 'none') {
+                    seccionSeguimiento.style.display = 'block'; // Mostrar la sección
+                    if (btnMostrarSeguimiento) {
+                        btnMostrarSeguimiento.style.display = 'none'; // Ocultar el botón si la sección está abierta
+                    }
+                    seccionSeguimiento.scrollIntoView({ behavior: 'smooth' });
+                    if (txtSeguimiento) {
+                        txtSeguimiento.focus();
+                    }
+
+                } else {
+                    seccionSeguimiento.style.display = 'none'; // Ocultar la sección
+                    // Restablecer el textarea y el file input al ocultar la sección
+                   // var txtSeguimiento = document.getElementById('<%= txtSeguimiento.ClientID %>');
+                    if (txtSeguimiento) {
+                        txtSeguimiento.value = '';
+                    }
+                    var fuArchivoPdf = document.getElementById('<%= fuArchivoPdf.ClientID %>');
+                    if (fuArchivoPdf) {
+                        fuArchivoPdf.value = ''; // Limpiar el input de archivo
+                    }
+                    if (btnMostrarSeguimiento) {
+                        btnMostrarSeguimiento.style.display = 'block'; // Mostrar el botón si la sección está cerrada
+                    }
+                }
+            }
+
+
+            function toggleConcluirSection() {
+                var seccionConcluir = document.getElementById('noTurno');
+                var btnConcluir = document.getElementById('btnConcluir');
+                var txtConcluir = document.getElementById('txtObservacion');
+
+                if (seccionConcluir.style.display === 'none') {
+                    seccionConcluir.style.display = 'block'; // Mostrar la sección
+                    if (btnConcluir) {
+                        btnConcluir.style.display = 'none'; // Ocultar el botón si la sección está abierta
+                    }
+
+                    seccionConcluir.scrollIntoView({ behavior: 'smooth' });
+
+                    if (txtConcluir) {
+                        txtConcluir.focus();
+                    }
+
+                } else {
+                    seccionConcluir.style.display = 'none'; // Ocultar la sección
+
+
+                    if (btnConcluir) {
+                        btnConcluir.style.display = 'block'; // Mostrar el botón si la sección está cerrada
+                    }
+                }
+            }
+
+            function validarConclusion() {
+                var isValid = true;
+
+                // A. CORREGIDO: Cambiar 'errorTxtConclusion' por 'errorTxtConcluir'
+                document.getElementById('errorTxtConcluir').style.display = 'none';
+                document.getElementById('<%= txtObservacion.ClientID %>').classList.remove('is-invalid');
+
+                // Valido las notas de conclusion
+                var txtObservacion = document.getElementById('<%= txtObservacion.ClientID %>');
+                if (txtObservacion.value.trim() === '') {
+
+                    document.getElementById('errorTxtConcluir').style.display = 'block';
+                    txtObservacion.classList.add('is-invalid');
+                    isValid = false;
+                }
+
+                return isValid;
+            }
+
+            function validarSeguimiento() {
+                var isValid = true;
+
+                // Limpiar mensajes de error y clases de invalidación
+                document.getElementById('errorTxtSeguimiento').style.display = 'none';
+                document.getElementById('<%= txtSeguimiento.ClientID %>').classList.remove('is-invalid');
+                document.getElementById('errorArchivoPdf').style.display = 'none';
+                document.getElementById('<%= fuArchivoPdf.ClientID %>').classList.remove('is-invalid');
+
+                // Validar Notas de Seguimiento
+                var txtSeguimiento = document.getElementById('<%= txtSeguimiento.ClientID %>');
+                if (txtSeguimiento.value.trim() === '') {
+                    document.getElementById('errorTxtSeguimiento').style.display = 'block';
+                    txtSeguimiento.classList.add('is-invalid');
+                    isValid = false;
+                }
+
+                // Validar Archivo Adjunto
+                var fuArchivoPdf = document.getElementById('<%= fuArchivoPdf.ClientID %>');
+                if (fuArchivoPdf.files.length === 0) {
+                    document.getElementById('errorArchivoPdf').innerHTML = 'Debe adjuntar un archivo PDF.';
+                    document.getElementById('errorArchivoPdf').style.display = 'block';
+                    fuArchivoPdf.classList.add('is-invalid');
+                    isValid = false;
+                } else {
+                    var file = fuArchivoPdf.files[0];
+                    var fileName = file.name;
+                    var fileExtension = fileName.split('.').pop().toLowerCase();
+
+                    if (fileExtension !== 'pdf') {
+                        document.getElementById('errorArchivoPdf').innerHTML = 'Solo se permiten archivos PDF.';
+                        document.getElementById('errorArchivoPdf').style.display = 'block';
+                        fuArchivoPdf.classList.add('is-invalid');
+                        isValid = false;
+                    } else if (file.size > (20 * 1024 * 1024)) {
+                        document.getElementById('errorArchivoPdf').innerHTML = 'El archivo no debe superar los 20 MB.';
+                        document.getElementById('errorArchivoPdf').style.display = 'block';
+                        fuArchivoPdf.classList.add('is-invalid');
+                        isValid = false;
+                    }
+                }
+
+                
+                
+                return true; 
+            }
+
+        </script>
+
+        <script>
+            //valida que ponga las dos fechas en el modal para el reporte por fecha
+            function validarFechasModal() {
+                // Limpia mensaje anterior
+                var msg = document.getElementById('msgValidacionFechas');
+                msg.classList.add('d-none');
+                msg.innerText = "";
+
+                var fechaInicio = document.getElementById('<%= txtFechaInicio.ClientID %>').value;
+                  var fechaFin = document.getElementById('<%= txtFechaFin.ClientID %>').value;
+
+                if (!fechaInicio || !fechaFin) {
+                    msg.innerText = 'Debes ingresar ambas fechas (inicio y fin).';
+                    msg.classList.remove('d-none');
+                    return false;
+                }
+                if (fechaInicio > fechaFin) {
+                    msg.innerText = 'La fecha de inicio no puede ser mayor a la fecha final.';
+                    msg.classList.remove('d-none');
+                    return false;
+                }
+                // Si todo bien, se puede hacer el postback
+                return true;
+            }
+        </script>
+
+        <!-- ========== JS AGREGADO PARA INTERNOS ========== -->
+        <script>
+            // Valida que ponga las dos fechas en el modal de INTERNOS para el reporte por fecha
+            function validarFechasModalInternos() {
+                var msg = document.getElementById('msgValidacionFechasInternos');
+                msg.classList.add('d-none');
+                msg.innerText = "";
+
+                var fechaInicio = document.getElementById('<%= txtFechaInicioInternos.ClientID %>').value;
+                var fechaFin = document.getElementById('<%= txtFechaFinInternos.ClientID %>').value;
+
+                if (!fechaInicio || !fechaFin) {
+                    msg.innerText = 'Debes ingresar ambas fechas (inicio y fin).';
+                    msg.classList.remove('d-none');
+                    return false;
+                }
+                if (fechaInicio > fechaFin) {
+                    msg.innerText = 'La fecha de inicio no puede ser mayor a la fecha final.';
+                    msg.classList.remove('d-none');
+                    return false;
+                }
+                return true;
+            }
+        </script>
+        <!-- ========== FIN JS INTERNOS ========== -->
+
+        <asp:PlaceHolder runat="server">
+            <%: Scripts.Render("~/Scripts/bootstrap.js") %>
+        </asp:PlaceHolder>
+
+
+
+
+
+
+    </form>
+
+</body>
+<script type="text/javascript">
+
+    function toggleTurnarSection() {
+        var seccionTurnar = document.getElementById('seccionTurnar');
+        var btnMostrarTurno = document.getElementById('btnMostrarTurno');
+
+
+        if (!seccionTurnar) {
+            console.error("Error: la sección con ID 'seccionTurnar' no se encontró en el DOM.");
+            return; // Salir de la función si el elemento no se encuentra
+        }
+
+        if (seccionTurnar.style.display === 'none') {
+            seccionTurnar.style.display = 'block';
+            if (btnMostrarTurno) {
+                btnMostrarTurno.style.display = 'none';
+            }
+        } else {
+            seccionTurnar.style.display = 'none';
+            if (btnMostrarTurno) {
+                btnMostrarTurno.style.display = 'block';
+            }
+        }
+    }
+
+</script>
+    <%-- Script para agregar Otros destinatarios fuera de la secretaría --%>
+<script type="text/javascript">
+    function initDireccionToggle() {
+        var ddl = document.getElementById('<%= ddlDireccion1.ClientID %>');
+        var contTexto = document.getElementById('divTextoDireccion12');
+        var txt = document.getElementById('<%= txtTextoDireccion12.ClientID %>');
+
+    // 👇 ESTE es el fix
+        var contDepto = document.getElementById('<%= divDepartamento1.ClientID %>');
+
+        // ddlDepartamento1 es Static, así que lo agarras directo
+        var ddlDepto = document.getElementById('ddlDepartamento1');
+
+        if (!ddl || !contTexto) return;
+
+        function actualizar() {
+            var es12 = (ddl.value === '12');
+
+            // 12 -> mostrar textbox, ocultar departamento
+            contTexto.style.display = es12 ? '' : 'none';
+            if (contDepto) contDepto.style.display = es12 ? 'none' : '';
+
+            if (es12) {
+                if (ddlDepto) { ddlDepto.value = ''; ddlDepto.disabled = true; }
+
+                // ✅ Validación cliente
+                if (txt) txt.required = true;
+            } else {
+                if (txt) {
+                    txt.value = '';
+                    txt.required = false; // ✅ quitar required cuando se oculta
+                }
+                if (ddlDepto) ddlDepto.disabled = false;
+            }
+        }
+
+        var handlerOriginal = ddl.onchange;
+        ddl.onchange = function (e) {
+            if (handlerOriginal) handlerOriginal.call(this, e || window.event);
+            actualizar();
+        };
+
+        actualizar();
+    }
+
+    if (typeof Sys !== "undefined" && Sys.Application) {
+        Sys.Application.add_load(initDireccionToggle);
+    } else {
+        document.addEventListener('DOMContentLoaded', initDireccionToggle);
+    }
+
+
+</script>
+
+
+</html>
