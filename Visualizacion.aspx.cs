@@ -39,6 +39,10 @@ namespace SURO2
         {
             get { return UpdatePanel1; }
         }
+        private static string JsSafe(string value)
+        {
+            return HttpUtility.JavaScriptStringEncode(value ?? string.Empty);
+        }
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -598,24 +602,24 @@ namespace SURO2
                                     {
                                         string script = $@"
                 $('#pdfFrame').attr('src', '{rutaParaPDF}');
-                $('#fichaFolioCaptura').text('{oficio.FolioCaptura}');
-                $('#fichaNumeroOficio').text('{oficio.NumeroOficio}');
-                $('#fichaFolioSecretario').text('{oficio.FolioOficio}');
-                $('#fichaRemitente').text('{oficio.Remitente}');
-                $('#fichaLugarRemitente').text('{oficio.LugarRemitente}');
-                $('#fichaTelefono').text('{oficio.Telefono}');
+                $('#fichaFolioCaptura').text('{JsSafe(oficio.FolioCaptura)}');
+                $('#fichaNumeroOficio').text('{JsSafe(oficio.NumeroOficio)}');
+                $('#fichaFolioSecretario').text('{JsSafe(oficio.FolioOficio)}');
+                $('#fichaRemitente').text('{JsSafe(oficio.Remitente)}');
+                $('#fichaLugarRemitente').text('{JsSafe(oficio.LugarRemitente)}');
+                $('#fichaTelefono').text('{JsSafe(oficio.Telefono)}');
 ";
                                         if (!string.IsNullOrEmpty(oficio.Correo))
                                         {
-                                            script += $"$('#fichaCorreo').text('{oficio.Correo}');";
+                                            script += $"$('#fichaCorreo').text('{JsSafe(oficio.Correo)}');";
                                         }
                                         script += $@"
-                $('#fichaMunicipio').text('{oficio.MunicipioRemitente}');
-                $('#fichaNivelAtencion').text('{oficio.NivelAtencion}');
-                $('#fichaTipoDocumento').text('{oficio.TipoDocumento}');
-                actualizarIconoEstatus('{oficio.Estatus}');
-                $('#fichaAsunto').text('{oficio.Asunto}');
-                $('#fichaFechaOficio').text('{oficio.FechaOficio}');
+                $('#fichaMunicipio').text('{JsSafe(oficio.MunicipioRemitente)}');
+                $('#fichaNivelAtencion').text('{JsSafe(oficio.NivelAtencion)}');
+                $('#fichaTipoDocumento').text('{JsSafe(oficio.TipoDocumento)}');
+                actualizarIconoEstatus('{JsSafe(oficio.Estatus)}');
+                $('#fichaAsunto').text('{JsSafe(oficio.Asunto)}');
+                $('#fichaFechaOficio').text('{JsSafe(oficio.FechaOficio)}');
                 $('#pdfModal').modal('show');
                 ////setTimeout(controlarVisibilidadBotonTurnar, 200);
 
