@@ -98,6 +98,17 @@ namespace SURO2
             int idUsuario = Convert.ToInt32(Session["ID"]);
             int tipoOrg = Convert.ToInt32(Session["TipoOrg"]);
             int OrgAdscrita = Convert.ToInt32(Session["OrgAdscrita"]);
+            string cacheKey = $"OficiosExt_{idUsuario}_{tipoOrg}_{OrgAdscrita}_{filtro}";
+            string cacheTimeKey = cacheKey + "_ts";
+
+            if (Session[cacheKey] is DataTable dtCache &&
+                Session[cacheTimeKey] is DateTime ts &&
+                (DateTime.Now - ts).TotalSeconds <= 45)
+            {
+                gvOficios.DataSource = dtCache;
+                gvOficios.DataBind();
+                return;
+            }
 
             Funciones funciones = new Funciones();
             using (SqlConnection conn = funciones.ConBD())
@@ -116,6 +127,8 @@ namespace SURO2
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
                 da.Fill(dt);
+                Session[cacheKey] = dt;
+                Session[cacheTimeKey] = DateTime.Now;
 
                 gvOficios.DataSource = dt;
                 gvOficios.DataBind();
