@@ -96,8 +96,19 @@ namespace SURO2
             }
 
             int idUsuario = Convert.ToInt32(Session["ID"]);
-            string tipoOrg = Session["TipoOrg"]?.ToString();
+            int tipoOrg = Convert.ToInt32(Session["TipoOrg"]);
             int OrgAdscrita = Convert.ToInt32(Session["OrgAdscrita"]);
+            string cacheKey = $"OficiosExt_{idUsuario}_{tipoOrg}_{OrgAdscrita}_{filtro}";
+            string cacheTimeKey = cacheKey + "_ts";
+
+            if (Session[cacheKey] is DataTable dtCache &&
+                Session[cacheTimeKey] is DateTime ts &&
+                (DateTime.Now - ts).TotalSeconds <= 45)
+            {
+                gvOficios.DataSource = dtCache;
+                gvOficios.DataBind();
+                return;
+            }
 
             Funciones funciones = new Funciones();
             using (SqlConnection conn = funciones.ConBD())
@@ -116,6 +127,8 @@ namespace SURO2
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
                 da.Fill(dt);
+                Session[cacheKey] = dt;
+                Session[cacheTimeKey] = DateTime.Now;
 
                 gvOficios.DataSource = dt;
                 gvOficios.DataBind();
@@ -268,7 +281,7 @@ namespace SURO2
         private Oficio ObtenerOficioParaModal(int idOficio)
         {
             Oficio oficio = null;
-            string tipoOrg = Session["TipoOrg"]?.ToString();
+            int tipoOrg = Convert.ToInt32(Session["TipoOrg"]);
             int OrgAdscrita = Convert.ToInt32(Session["OrgAdscrita"]);
 
 
@@ -278,7 +291,7 @@ namespace SURO2
                 SqlCommand cmd = new SqlCommand("SP_MuestraOficioModal", con);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@id", idOficio);
-                cmd.Parameters.AddWithValue("@tipoOrg", tipoOrg);
+                cmd.Parameters.Add("@tipoOrg", SqlDbType.Int).Value = tipoOrg;
                 cmd.Parameters.AddWithValue("@OrgAdscrita", OrgAdscrita);
 
                 SqlDataReader reader = cmd.ExecuteReader();
@@ -906,6 +919,3 @@ namespace SURO2
 
     }
 }
-
-
-
