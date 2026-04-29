@@ -35,11 +35,13 @@ public class VisualizadorPDFHandler : IHttpHandler
                     return;
                 }
 
-                byte[] archivoBytes = File.ReadAllBytes(rutaCompletaArchivo);
-
                 context.Response.ContentType = "application/pdf";
                 context.Response.AddHeader("Content-Disposition", "inline; filename=" + Path.GetFileName(nombreArchivo));
-                context.Response.BinaryWrite(archivoBytes);
+                context.Response.BufferOutput = false;
+                context.Response.Cache.SetCacheability(HttpCacheability.Public);
+                context.Response.Cache.SetMaxAge(TimeSpan.FromMinutes(10));
+                context.Response.Cache.SetSlidingExpiration(false);
+                context.Response.TransmitFile(rutaCompletaArchivo);
                 context.Response.Flush();
                 context.ApplicationInstance.CompleteRequest();
             }

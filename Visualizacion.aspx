@@ -67,6 +67,7 @@
                 AutoGenerateColumns="False"
                 CssClass="table table-bordered"
                 DataKeyNames="ID"
+                EnableViewState="false"
                 OnRowDataBound="gvOficios_RowDataBound"
                 OnRowCommand="gvOficios_RowCommand"
                 OnPageIndexChanging="gvOficios_PageIndexChanging"
@@ -106,6 +107,7 @@
                     <div class="table-wrapper">
                         <asp:GridView ID="gvOficios" HeaderStyle-CssClass="grid-header" runat="server"
                             AutoGenerateColumns="False" DataKeyNames="ID" Width="100%" Style="table-layout: fixed;"
+                            EnableViewState="false"
                             CssClass="table table-bordered" OnRowDataBound="gvOficios_RowDataBound"
                             AllowPaging="true" PageSize="10" OnRowCommand="gvOficios_RowCommand"
                             OnPageIndexChanging="gvOficios_PageIndexChanging" OnRowCreated="gvOficios_RowCreated">
@@ -159,4 +161,3 @@
 
 
 </asp:Content>
-
