@@ -96,7 +96,7 @@ namespace SURO2
             }
 
             int idUsuario = Convert.ToInt32(Session["ID"]);
-            string tipoOrg = Session["TipoOrg"]?.ToString();
+            int tipoOrg = Convert.ToInt32(Session["TipoOrg"]);
             int OrgAdscrita = Convert.ToInt32(Session["OrgAdscrita"]);
 
             Funciones funciones = new Funciones();
@@ -268,7 +268,7 @@ namespace SURO2
         private Oficio ObtenerOficioParaModal(int idOficio)
         {
             Oficio oficio = null;
-            string tipoOrg = Session["TipoOrg"]?.ToString();
+            int tipoOrg = Convert.ToInt32(Session["TipoOrg"]);
             int OrgAdscrita = Convert.ToInt32(Session["OrgAdscrita"]);
 
 
@@ -278,7 +278,7 @@ namespace SURO2
                 SqlCommand cmd = new SqlCommand("SP_MuestraOficioModal", con);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@id", idOficio);
-                cmd.Parameters.AddWithValue("@tipoOrg", tipoOrg);
+                cmd.Parameters.Add("@tipoOrg", SqlDbType.Int).Value = tipoOrg;
                 cmd.Parameters.AddWithValue("@OrgAdscrita", OrgAdscrita);
 
                 SqlDataReader reader = cmd.ExecuteReader();
@@ -349,8 +349,6 @@ namespace SURO2
                         cmd.ExecuteNonQuery();
                     }
                     oficio = ObtenerOficioParaModal(id);
-                    CargarOficios();
-                    if (UpdatePanel1 != null) UpdatePanel1.Update();
                 }
 
 
@@ -906,6 +904,3 @@ namespace SURO2
 
     }
 }
-
-
-

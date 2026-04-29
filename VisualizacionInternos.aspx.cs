@@ -498,8 +498,6 @@ namespace SURO2
                         cmd.ExecuteNonQuery();
                     }
                     oficio = ObtenerOficioParaModal(id);
-                    CargarOficios();
-                    if (UpdatePanel1 != null) UpdatePanel1.Update();
                 }
 
 

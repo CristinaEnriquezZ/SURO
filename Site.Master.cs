@@ -1096,8 +1096,9 @@ namespace SURO2
             }
             catch (Exception ex)
             {
-                // Manejo de la excepción de forma más específica y útil.
-                Console.WriteLine($"Error al subir el archivo: {ex.Message}");
+                // Log más completo para diagnóstico de fallas intermitentes con NAS.
+                System.Diagnostics.Trace.TraceError(
+                    $"[NAS_UPLOAD_ERROR] Ruta: {rutaFinal}. Mensaje: {ex.Message}. Detalle: {ex}");
                 return string.Empty;
             }
         }
@@ -1579,6 +1580,5 @@ namespace SURO2
 
 
 }
-
 
 
