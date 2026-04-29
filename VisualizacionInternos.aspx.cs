@@ -31,6 +31,10 @@ namespace SURO2
         {
             get { return UpdatePanel1; }
         }
+        private static string JsSafe(string value)
+        {
+            return HttpUtility.JavaScriptStringEncode(value ?? string.Empty);
+        }
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -202,6 +206,17 @@ namespace SURO2
             MarcarPestanasModo(modo);
 
             byte tipoLista = (byte)(modo == "turnados" ? 2 : 1);
+            string cacheKey = $"OficiosInt_{idUsuario}_{OrgAdscrita}_{tipoOrg}_{tipoLista}_{filtro}";
+            string cacheTimeKey = cacheKey + "_ts";
+
+            if (Session[cacheKey] is DataTable dtCache &&
+                Session[cacheTimeKey] is DateTime ts &&
+                (DateTime.Now - ts).TotalSeconds <= 45)
+            {
+                gvOficios.DataSource = dtCache;
+                gvOficios.DataBind();
+                return;
+            }
 
 
             // Opcional: cambia el título según el modo
@@ -230,6 +245,8 @@ namespace SURO2
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
                 da.Fill(dt);
+                Session[cacheKey] = dt;
+                Session[cacheTimeKey] = DateTime.Now;
 
                 gvOficios.DataSource = dt;
                 gvOficios.DataBind();
@@ -736,24 +753,24 @@ namespace SURO2
                                 {
                                     string script = $@"
                 $('#pdfFrame').attr('src', '{rutaParaPDF}');
-                $('#fichaFolioCaptura').text('{oficio.FolioCaptura}');
-                $('#fichaNumeroOficio').text('{oficio.NumeroOficio}');
-                $('#fichaFolioSecretario').text('{oficio.FolioOficio}');
-                $('#fichaRemitente').text('{oficio.Remitente}');
-                $('#fichaLugarRemitente').text('{oficio.LugarRemitente}');
-                $('#fichaTelefono').text('{oficio.Telefono}');
+                $('#fichaFolioCaptura').text('{JsSafe(oficio.FolioCaptura)}');
+                $('#fichaNumeroOficio').text('{JsSafe(oficio.NumeroOficio)}');
+                $('#fichaFolioSecretario').text('{JsSafe(oficio.FolioOficio)}');
+                $('#fichaRemitente').text('{JsSafe(oficio.Remitente)}');
+                $('#fichaLugarRemitente').text('{JsSafe(oficio.LugarRemitente)}');
+                $('#fichaTelefono').text('{JsSafe(oficio.Telefono)}');
 ";
                                     if (!string.IsNullOrEmpty(oficio.Correo))
                                     {
-                                        script += $"$('#fichaCorreo').text('{oficio.Correo}');";
+                                        script += $"$('#fichaCorreo').text('{JsSafe(oficio.Correo)}');";
                                     }
                                     script += $@"
-                $('#fichaMunicipio').text('{oficio.MunicipioRemitente}');
-                $('#fichaNivelAtencion').text('{oficio.NivelAtencion}');
-                $('#fichaTipoDocumento').text('{oficio.TipoDocumento}');
-                actualizarIconoEstatus('{oficio.Estatus}');
-                $('#fichaAsunto').text('{oficio.Asunto}');
-                $('#fichaFechaOficio').text('{oficio.FechaOficio}');
+                $('#fichaMunicipio').text('{JsSafe(oficio.MunicipioRemitente)}');
+                $('#fichaNivelAtencion').text('{JsSafe(oficio.NivelAtencion)}');
+                $('#fichaTipoDocumento').text('{JsSafe(oficio.TipoDocumento)}');
+                actualizarIconoEstatus('{JsSafe(oficio.Estatus)}');
+                $('#fichaAsunto').text('{JsSafe(oficio.Asunto)}');
+                $('#fichaFechaOficio').text('{JsSafe(oficio.FechaOficio)}');
                 $('#pdfModal .col-md-6.mb-2').each(function() {{
                     var span = $(this).find('span');
                     if (span.length && !span.text().trim()) {{
